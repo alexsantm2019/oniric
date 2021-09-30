@@ -1,4 +1,4 @@
-# oniric
+# Oniric Cruises
 
 A new Flutter project.
 
