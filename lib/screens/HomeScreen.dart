@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:oniric/widgets/availability/AvailabilityWidget.dart';
-import 'package:oniric/widgets/boats/BoatsMenuWidget.dart';
+// import 'package:oniric/widgets/boats/BoatsMenuWidget.dart';
+import 'package:oniric/widgets/boats/BoatsMasterWidget.dart';
 import 'package:oniric/widgets/contact/ContactWidget.dart';
 import 'package:oniric/mixins/Helper.dart';
 import '../constants.dart';
@@ -37,7 +38,7 @@ class HomeScreen extends StatelessWidget with Helper {
           body: TabBarView(
             children: [
               AvailabilityWidget(),
-              BoatsMenuWidget(),
+              BoatsMasterWidget(),
               ContactWidget(),
             ],
           ),
