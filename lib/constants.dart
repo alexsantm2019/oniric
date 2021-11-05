@@ -33,3 +33,20 @@ const titleSplashStyle = TextStyle(color: Colors.white);
 // ESTILOS PARA TABLAS
 const titleTableStyle = TextStyle(fontSize: 16.0, color: Colors.orange);
 const contentTableStyle = TextStyle(fontSize: 14.0);
+
+//ESTILOS TABLAS DISPONIBILIDAD:
+const cruNameStyles = TextStyle(
+    fontSize: 16, fontStyle: FontStyle.normal, fontWeight: FontWeight.bold);
+const departuresDatesStyles =
+    TextStyle(fontSize: 11, fontStyle: FontStyle.normal);
+const itineraryStyles = TextStyle(
+    fontSize: 12,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.bold,
+    color: Colors.black);
+
+//ESTILOS TABLAS ITINERARIOS:
+const contentActivitiesDataTable =
+    TextStyle(fontSize: 11.0, fontStyle: FontStyle.italic);
+const contentMeridianDataTable = TextStyle(
+    fontSize: 12.0, fontStyle: FontStyle.italic, color: Colors.black26);

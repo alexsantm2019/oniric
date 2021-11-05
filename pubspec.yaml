@@ -39,6 +39,12 @@ dependencies:
   flutter_bloc: ^7.0.0
   country_list_pick: ^1.0.0+3
   mailer: ^3.2.1
+  # syncfusion_flutter_datepicker: ^19.3.48
+  # date_range_picker: ^1.0.7
+  date_range_form_field: ^1.0.2
+  font_awesome_flutter: ^9.2.0
+  json_table: ^2.0.1
+  url_launcher: ^6.0.12
   
 
 dev_dependencies:

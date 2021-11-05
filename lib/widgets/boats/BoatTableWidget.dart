@@ -38,47 +38,6 @@ class BoatTableWidget extends StatelessWidget {
                       '${boatInfo.vslDescription != null ? boatInfo.vslDescription : "No description"}')
                 ]),
               ]),
-              // TableRow(children: [
-              //   Column(children: [Text('Url', style: titleTableStyle)]),
-              //   Column(children: [
-              //     Text(
-              //         '${boatInfo.vslUnbranded != null ? boatInfo.vslUnbranded : "No url"}')
-              //   ]),
-              // ]),
-              // TableRow(children: [
-              //   Column(children: [Text('Capacity', style: titleTableStyle)]),
-              //   Column(children: [
-              //     Text(
-              //         '${boatInfo.vslCapacity != null ? boatInfo.vslCapacity + 'pax' : "No capacity"}')
-              //   ]),
-              // ]),
-              // TableRow(children: [
-              //   Column(children: [Text('Model', style: titleTableStyle)]),
-              //   Column(children: [
-              //     Text(
-              //         '${boatInfo.vslModel != null ? boatInfo.vslModel : "No model"}')
-              //   ]),
-              // ]),
-              // TableRow(children: [
-              //   Column(children: [Text('Year', style: titleTableStyle)]),
-              //   Column(children: [
-              //     Text('${boatInfo.vslYear != null ? boatInfo.vslYear : "No year"}')
-              //   ]),
-              // ]),
-              // TableRow(children: [
-              //   Column(children: [Text('Length', style: titleTableStyle)]),
-              //   Column(children: [
-              //     Text(
-              //         '${boatInfo.vslLength != null ? boatInfo.vslLength : "No Length"}')
-              //   ]),
-              // ]),
-              // TableRow(children: [
-              //   Column(children: [Text('Width', style: titleTableStyle)]),
-              //   Column(children: [
-              //     Text(
-              //         '${boatInfo.vslWidth != null ? boatInfo.vslWidth : "No Width"}')
-              //   ]),
-              // ]),
             ],
           ),
         ),

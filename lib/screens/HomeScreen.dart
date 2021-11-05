@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:oniric/widgets/availability/AvailabilityWidget.dart';
-// import 'package:oniric/widgets/boats/BoatsMenuWidget.dart';
 import 'package:oniric/widgets/boats/BoatsMasterWidget.dart';
 import 'package:oniric/widgets/contact/ContactWidget.dart';
 import 'package:oniric/mixins/Helper.dart';
@@ -20,8 +19,10 @@ class HomeScreen extends StatelessWidget with Helper {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text('Oniric Cruises'))
+                  padding: const EdgeInsets.all(10.0),
+                  child: Image.asset('images/logo-atc-white.png',
+                      width: 150, height: 70, fit: BoxFit.fill),
+                )
               ],
             ),
             backgroundColor: hexStringToColor(MAIN_COLOR_ORANGE),
@@ -38,6 +39,7 @@ class HomeScreen extends StatelessWidget with Helper {
           body: TabBarView(
             children: [
               AvailabilityWidget(),
+              //AvailabilityPickerWidget(),
               BoatsMasterWidget(),
               ContactWidget(),
             ],

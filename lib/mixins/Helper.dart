@@ -8,4 +8,41 @@ class Helper {
     }
     return Color(int.parse(hexColor, radix: 16));
   }
+
+// Funciones para retornar número de espacios disponibles / bloqueados / confirmados (AVAILABILITY)
+  numAvailables(List<dynamic> array) {
+    int slotsWithBooking = 0;
+    array.map((cabin) {
+      cabin['slots'].map((booking) {
+        if (booking['booking'] == null) slotsWithBooking += 1;
+      }).toList();
+    }).toList();
+    return slotsWithBooking;
+  }
+
+  numBlocked(List<dynamic> array) {
+    int slotsWithBooking = 0;
+    array.map((cabin) {
+      cabin['slots'].map((booking) {
+        if (booking['booking'] != null) {
+          if (booking['booking']['bosStatus'] == 1) slotsWithBooking += 1;
+          if (booking['booking']['bosStatus'] == 0 &&
+              booking['booking']['bosCondition'] == 1) slotsWithBooking += 1;
+        }
+      }).toList();
+    }).toList();
+    return slotsWithBooking;
+  }
+
+  numConfirmed(List<dynamic> array) {
+    int slotsWithBooking = 0;
+    array.map((cabin) {
+      cabin['slots'].map((booking) {
+        if (booking['booking'] != null) {
+          if (booking['booking']['bosStatus'] == 2) slotsWithBooking += 1;
+        }
+      }).toList();
+    }).toList();
+    return slotsWithBooking;
+  }
 }

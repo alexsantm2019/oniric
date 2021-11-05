@@ -23,6 +23,10 @@ class _BoatMasterWidget extends State<BoatsMasterWidget> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter API and ListView Example',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        scaffoldBackgroundColor: Colors.black,
+      ),
       home: Scaffold(
         body: Center(
           child: FutureBuilder<List<Boats>>(
@@ -31,6 +35,7 @@ class _BoatMasterWidget extends State<BoatsMasterWidget> {
               if (snapshot.hasData) {
                 List<Boats> boats = snapshot.data;
                 return ListView.builder(
+                    padding: EdgeInsets.all(0.0),
                     itemCount: boats.length,
                     itemBuilder: (BuildContext context, int index) {
                       return BoatCardWidget(

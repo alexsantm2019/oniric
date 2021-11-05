@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:oniric/models/Boats.dart';
+import 'package:oniric/models/Itinerary.dart';
 import 'package:oniric/models/Service.dart';
 import 'package:oniric/models/Cabins.dart';
 import 'package:oniric/models/Availability.dart';
@@ -35,8 +36,6 @@ class Services {
           final model = new Boats.fromJson(item);
           modelList.add(model);
         }
-        print("Datos de botes (1) ===> ");
-        print(modelList);
         return modelList;
       } else {
         throw Exception('Failed to load post');
@@ -133,10 +132,12 @@ class Services {
 
 // DISPONIBILIDAD - AVAILABILITY
 
-  Future<List<Availability>> getAvailability() async {
+  Future<List<Availability>> getAvailability(start, end) async {
+    print('===================Consultando API=========================');
+    print("Modificando fecha: Start: $start End: $end");
     var urlAvailability =
         //'https://gpstest.andeantc.com/api/cabin/get-cabins-by-vessel/$vslId';
-        'http://gpstest.andeantc.com/api/availability/get-availability?start=2022-02-01&end=2022-02-30'; // TODO: cambiar
+        'http://gpstest.andeantc.com/api/availability/get-availability?start=$start&end=$end'; // TODO: cambiar
 
     try {
       final response = await http.get(Uri.parse(urlAvailability), headers: {
@@ -156,7 +157,29 @@ class Services {
         throw Exception('Failed to load post');
       }
     } catch (e) {
-      print("Error en api: " + e.toString());
+      print("Error en getAvailability: " + e.toString());
+      rethrow;
+    }
+  }
+
+  //ITINERARIOS:
+
+  Future<Itinerary> getItinerariesByItiId(itiId) async {
+    var urlItinerary =
+        'https://gpstest.andeantc.com/api/itinerary/$itiId/summary-full';
+    try {
+      final response = await http.get(Uri.parse(urlItinerary), headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+        'Charset': 'utf-8'
+      });
+      if (response.statusCode == 200) {
+        var parsedJson = json.decode(response.body);
+        return Itinerary.fromJson(parsedJson['data']);
+      } else {
+        throw Exception('Failed to load post');
+      }
+    } catch (e) {
+      print(e.toString());
       rethrow;
     }
   }

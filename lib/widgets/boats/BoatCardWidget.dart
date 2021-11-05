@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:oniric/mixins/Helper.dart';
 import 'package:oniric/models/Boats.dart';
 import '../../constants.dart';
 
-class BoatCardWidget extends StatelessWidget {
+class BoatCardWidget extends StatelessWidget with Helper {
   final Boats boat;
   final Function onTap;
   final Function onSwipe;
@@ -26,27 +27,38 @@ class BoatCardWidget extends StatelessWidget {
       onTap: () {
         onTap(boat);
       },
-      child: Card(
-          shape: RoundedRectangleBorder(
-            side: BorderSide(color: Colors.blue[300], width: 2),
-            borderRadius: BorderRadius.circular(5),
-          ),
-          color: Colors.blue[100],
-          elevation: 5,
-          child: Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Row(
-              //mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                // Image.network(
-                //     "https://www.countryflags.io/$imageCountry/flat/32.png"),
-                SizedBox(width: 30),
-                Text(boat.vslName, style: fromTextStyle),
-                Text(boat.vslAlias, style: fromTextStyle),
-              ],
+      child: new Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          new Card(
+            child: AnimatedContainer(
+              padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+              height: 80,
+              duration: const Duration(seconds: 10),
+              curve: Curves.fastOutSlowIn,
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(boat.vslName,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: 25,
+                        fontStyle: FontStyle.italic,
+                        color: Colors.white)),
+              ),
+              decoration: new BoxDecoration(
+                color: hexStringToColor(
+                    boat.vslColor != null ? boat.vslColor : MAIN_COLOR_ORANGE),
+                image: new DecorationImage(
+                  fit: BoxFit.fitWidth,
+                  colorFilter: new ColorFilter.mode(
+                      Colors.black.withOpacity(0.4), BlendMode.dstATop),
+                  image: AssetImage('images/defaultBoat.jpg'),
+                ),
+              ),
             ),
-          )),
+          ),
+        ],
+      ),
       //),
     );
   }
