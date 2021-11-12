@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../constants.dart';
 import 'package:oniric/models/Boats.dart';
 import 'package:oniric/mixins/Helper.dart';
 import 'package:oniric/widgets/boats/BoatTableWidget.dart';
 import 'package:oniric/widgets/boats/BoatServicesWidget.dart';
-import 'package:oniric/widgets/boats/BoatDecksWidget.dart';
 import 'package:oniric/widgets/boats/BoatCabinsWidget.dart';
 
-class BoatDetailWidget extends StatelessWidget with Helper {
+class BoatDetailBoatWidget extends StatelessWidget with Helper {
   final Boats boatInfo;
   final Boats boat;
 
-  BoatDetailWidget({@required this.boatInfo, this.boat});
+  BoatDetailBoatWidget({@required this.boatInfo, this.boat});
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +24,13 @@ class BoatDetailWidget extends StatelessWidget with Helper {
             title: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                new Icon(
+                  FontAwesomeIcons.ship,
+                  size: 20,
+                ),
                 Container(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text(boatInfo.vslAlias, style: titleDetailBoatStyle))
+                    child: Text(boatInfo.vslName, style: titleDetailBoatStyle))
               ],
             ),
             //backgroundColor: hexStringToColor(MAIN_COLOR_ORANGE),
@@ -50,8 +54,8 @@ class BoatDetailWidget extends StatelessWidget with Helper {
               BoatTableWidget(
                 boatInfo: boatInfo,
               ),
-              BoatServicesWidget(vslId: vslId),
-              BoatCabinsWidget(vslId: vslId),
+              BoatServicesWidget(vslId: vslId, boatColor: boatInfo.vslColor),
+              BoatCabinsWidget(vslId: vslId, boatColor: boatInfo.vslColor),
               // BoatDecksWidget(
               //   boatInfo: boatInfo,
               // ),

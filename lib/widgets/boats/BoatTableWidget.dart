@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:oniric/mixins/Helper.dart';
 import 'package:oniric/models/Boats.dart';
 import '../../constants.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
-class BoatTableWidget extends StatelessWidget {
+class BoatTableWidget extends StatelessWidget with Helper {
   final Boats boatInfo;
 
   BoatTableWidget({this.boatInfo});
@@ -15,32 +17,169 @@ class BoatTableWidget extends StatelessWidget {
           body: SingleChildScrollView(
               child: Column(children: <Widget>[
         Image(image: AssetImage('images/defaultBoat.jpg'), fit: BoxFit.cover),
-        Container(
-          margin: EdgeInsets.all(20),
-          child: Table(
-            defaultColumnWidth: IntrinsicColumnWidth(),
-            columnWidths: {0: FixedColumnWidth(100), 1: FixedColumnWidth(250)},
-            border: TableBorder.all(
-                color: Colors.grey, style: BorderStyle.solid, width: 2),
-            children: [
-              TableRow(children: [
-                Column(children: [Text('Name', style: titleTableStyle)]),
-                Column(children: [
-                  Text(
-                      '${boatInfo.vslName != null ? boatInfo.vslName : "No Name"}',
-                      style: contentTableStyle)
-                ]),
-              ]),
-              TableRow(children: [
-                Column(children: [Text('Description', style: titleTableStyle)]),
-                Column(children: [
-                  Text(
-                      '${boatInfo.vslDescription != null ? boatInfo.vslDescription : "No description"}')
-                ]),
-              ]),
-            ],
+        AnimationLimiter(
+          child: Card(
+            child: Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Table(
+                defaultColumnWidth: IntrinsicColumnWidth(),
+                columnWidths: {
+                  0: FixedColumnWidth(100),
+                  1: FixedColumnWidth(250)
+                },
+                border: TableBorder.all(
+                    color: Colors.grey.shade100,
+                    style: BorderStyle.solid,
+                    width: 1),
+                children: [
+                  TableRow(children: [
+                    Column(children: [
+                      Text('Name',
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              color: hexStringToColor(boatInfo.vslColor != null
+                                  ? boatInfo.vslColor
+                                  : MAIN_COLOR_ORANGE)))
+                    ]),
+                    Column(children: [
+                      Text(
+                          '${boatInfo.vslName != null ? boatInfo.vslName : "No Name"}',
+                          style: contentTableStyle)
+                    ]),
+                  ]),
+                  TableRow(children: [
+                    Column(children: [
+                      Text('Description',
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              color: hexStringToColor(boatInfo.vslColor != null
+                                  ? boatInfo.vslColor
+                                  : MAIN_COLOR_ORANGE)))
+                    ]),
+                    Column(children: [
+                      Text(
+                          '${boatInfo.vslDescription != null ? boatInfo.vslDescription : "No description"}')
+                    ]),
+                  ]),
+                  TableRow(children: [
+                    Column(children: [
+                      Text('Capacity',
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              color: hexStringToColor(boatInfo.vslColor != null
+                                  ? boatInfo.vslColor
+                                  : MAIN_COLOR_ORANGE)))
+                    ]),
+                    Column(children: [
+                      Text(
+                          '${boatInfo.vslCapacity.toString() ?? "No capacity added"}')
+                    ]),
+                  ]),
+                  // TableRow(children: [
+                  //   Column(children: [Text('Category', style: titleTableStyle)]),
+                  //   Column(children: [
+                  //     Text('${boatInfo.vslCategory ?? "No category added"}')
+                  //   ]),
+                  // ]),
+                  TableRow(children: [
+                    Column(children: [
+                      Text('Model',
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              color: hexStringToColor(boatInfo.vslColor != null
+                                  ? boatInfo.vslColor
+                                  : MAIN_COLOR_ORANGE)))
+                    ]),
+                    Column(children: [
+                      Text(
+                          '${boatInfo.vslModel != null ? boatInfo.vslModel : "No model added"}')
+                    ]),
+                  ]),
+                  TableRow(children: [
+                    Column(children: [
+                      Text('Year',
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              color: hexStringToColor(boatInfo.vslColor != null
+                                  ? boatInfo.vslColor
+                                  : MAIN_COLOR_ORANGE)))
+                    ]),
+                    Column(children: [
+                      Text(
+                          '${boatInfo.vslYear != null ? boatInfo.vslYear : "No year added"}')
+                    ]),
+                  ]),
+                  TableRow(children: [
+                    Column(children: [
+                      Text('Power',
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              color: hexStringToColor(boatInfo.vslColor != null
+                                  ? boatInfo.vslColor
+                                  : MAIN_COLOR_ORANGE)))
+                    ]),
+                    Column(children: [
+                      Text(
+                          '${boatInfo.vslPower != null ? boatInfo.vslPower : "No information added"}')
+                    ]),
+                  ]),
+                  TableRow(children: [
+                    Column(children: [
+                      Text('Speed',
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              color: hexStringToColor(boatInfo.vslColor != null
+                                  ? boatInfo.vslColor
+                                  : MAIN_COLOR_ORANGE)))
+                    ]),
+                    Column(children: [
+                      Text(
+                          '${boatInfo.vslSpeed != null ? boatInfo.vslSpeed : "No information added"}')
+                    ]),
+                  ]),
+                  TableRow(children: [
+                    Column(children: [
+                      Text('Length',
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              color: hexStringToColor(boatInfo.vslColor != null
+                                  ? boatInfo.vslColor
+                                  : MAIN_COLOR_ORANGE)))
+                    ]),
+                    Column(children: [
+                      Text(
+                          '${boatInfo.vslLength != null ? boatInfo.vslLength.toString() : "No information added"}')
+                    ]),
+                  ]),
+                  TableRow(children: [
+                    Column(children: [
+                      Text('Width',
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              color: hexStringToColor(boatInfo.vslColor != null
+                                  ? boatInfo.vslColor
+                                  : MAIN_COLOR_ORANGE)))
+                    ]),
+                    Column(children: [
+                      Text(
+                          '${boatInfo.vslWidth != null ? boatInfo.vslWidth.toString() : "No information added"}')
+                    ]),
+                  ]),
+                ],
+              ),
+            ),
+            margin: EdgeInsets.all(20),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
+              side: BorderSide(
+                  color: hexStringToColor(boatInfo.vslColor != null
+                      ? boatInfo.vslColor
+                      : MAIN_COLOR_ORANGE),
+                  width: 1),
+            ),
+            elevation: 10,
           ),
-        ),
+        )
       ]))),
     );
   }

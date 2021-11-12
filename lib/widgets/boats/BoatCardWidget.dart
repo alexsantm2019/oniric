@@ -31,11 +31,9 @@ class BoatCardWidget extends StatelessWidget with Helper {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           new Card(
-            child: AnimatedContainer(
+            child: Container(
               padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
               height: 80,
-              duration: const Duration(seconds: 10),
-              curve: Curves.fastOutSlowIn,
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(boat.vslName,

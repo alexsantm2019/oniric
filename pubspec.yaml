@@ -45,6 +45,7 @@ dependencies:
   font_awesome_flutter: ^9.2.0
   json_table: ^2.0.1
   url_launcher: ^6.0.12
+  flutter_staggered_animations: "^1.0.0"
   
 
 dev_dependencies:

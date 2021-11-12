@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:oniric/models/Boats.dart';
 import 'package:oniric/models/Itinerary.dart';
+import 'package:oniric/models/Metadata.dart';
 import 'package:oniric/models/Service.dart';
 import 'package:oniric/models/Cabins.dart';
 import 'package:oniric/models/Availability.dart';
@@ -87,9 +88,6 @@ class Services {
           final model = new Service.fromJson(item);
           modelList.add(model);
         }
-        // print("Datos de servicio (2) ===> ");
-        // print(modelList);
-
         return modelList;
       } else {
         throw Exception('Failed to load post');
@@ -102,9 +100,50 @@ class Services {
 
 // CABINS y DECKS
 
+  // Future<List<Cabins>> getCabinsByVslId(vslId) async {
+  //   var urlCabinsByVessel =
+  //       'http://gpstest.andeantc.com/api/cabin/get-cabins-by-vessel/5';
+
+  //   try {
+  //     final response = await http.get(Uri.parse(urlCabinsByVessel), headers: {
+  //       'Content-Type': 'application/json;charset=UTF-8',
+  //       'Charset': 'utf-8'
+  //     });
+
+  //     var responseJson = json.decode(response.body);
+  //     print(responseJson);
+  //     var resp = (responseJson['data'])
+  //         .map<Cabins>((p) => Cabins.fromJson(p))
+  //         .toList();
+  //     return Future.value(resp);
+  //   } catch (e) {
+  //     print("Error en api: " + e.toString());
+  //     rethrow;
+  //   }
+  // }
+
+  // Future<List<Cabins>> getCabinsByVslId(vslId) async {
+  //   var urlCabinsByVessel =
+  //       'http://gpstest.andeantc.com/api/cabin/get-cabins-by-vessel/5';
+  //   var response = await http.get(Uri.parse(urlCabinsByVessel));
+  //   var responseJson = json.decode(response.body);
+  //   print(responseJson);
+  //   return (responseJson['datas'])
+  //       .map<Cabins>((p) => Cabins.fromJson(p))
+  //       .toList();
+  // }
+
+  // List<Cabins> getCabinsByVslId(vslId) {
+  //   List<Cabins> _listProducts;
+  //   _repo.getAll().then((value) {
+  //     if (value != null) value.forEach((item) => _listProducts.add(item));
+  //   });
+  //   return _listProducts == null ? [] : _listProducts;
+  // }
+
   Future<List<Cabins>> getCabinsByVslId(vslId) async {
     var urlCabinsByVessel =
-        //'https://gpstest.andeantc.com/api/cabin/get-cabins-by-vessel/$vslId';
+        //    'https://gpstest.andeantc.com/api/cabin/get-cabins-by-vessel/$vslId';
         'http://gpstest.andeantc.com/api/cabin/get-cabins-by-vessel/5'; // TODO: cambiar
 
     try {
@@ -129,6 +168,60 @@ class Services {
       rethrow;
     }
   }
+
+  Future<List<Metadata>> getCatalogo(group) async {
+    var url =
+        'https://gpstest.andeantc.com/api/metadata/getMetadataByGroup/$group';
+
+    try {
+      final response = await http.get(Uri.parse(url), headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+        'Charset': 'utf-8'
+      });
+
+      final Map<String, dynamic> decodeData = json.decode(response.body);
+      final List<Metadata> modelList = [];
+      if (response.statusCode == 200) {
+        for (var item in decodeData['data']) {
+          final model = new Metadata.fromJson(item);
+          modelList.add(model);
+        }
+        print("API $modelList");
+        return modelList;
+      } else {
+        throw Exception('Failed to load post');
+      }
+    } catch (e) {
+      print("Error en api: " + e.toString());
+      rethrow;
+    }
+  }
+
+  // Future<Cabins> getCabinsByVslId(vslId) async {
+  //   var urlCabinsByVessel =
+  //       //    'https://gpstest.andeantc.com/api/cabin/get-cabins-by-vessel/$vslId';
+  //       'http://gpstest.andeantc.com/api/cabin/get-cabins-by-vessel/5'; // TODO: cambiar
+
+  //   try {
+  //     final response = await http.get(Uri.parse(urlCabinsByVessel), headers: {
+  //       'Content-Type': 'application/json;charset=UTF-8',
+  //       'Charset': 'utf-8'
+  //     });
+
+  //     final Map<String, dynamic> decodeData = json.decode(response.body);
+  //     final List<Cabins> modelList = [];
+  //     if (response.statusCode == 200) {
+  //       List jsonResponse = json.decode(response.body);
+  //       //print(jsonResponse.map((job) => new Cabins.fromJson(job)).toList());
+  //       return jsonResponse.map((job) => new Cabins.fromJson(job));
+  //     } else {
+  //       throw Exception('Failed to load post');
+  //     }
+  //   } catch (e) {
+  //     print("Error en api: " + e.toString());
+  //     rethrow;
+  //   }
+  // }
 
 // DISPONIBILIDAD - AVAILABILITY
 

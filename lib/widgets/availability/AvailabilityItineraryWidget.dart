@@ -18,32 +18,70 @@ class AvailabilityItineraryWidget extends StatelessWidget {
           body: SingleChildScrollView(
               child: Column(children: <Widget>[
         Container(
-          padding: EdgeInsets.only(left: 10.00),
+          padding: EdgeInsets.only(left: 20.00),
+          color: Colors.orange.shade300,
           //width: 415.0,
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Expanded(
-                child: Text(itineraryInfo.cruName, textAlign: TextAlign.center),
+                child: TextButton(
+                    onPressed: () => Navigator.of(context).pop(false),
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      child: Icon(Icons.keyboard_backspace_sharp,
+                          color: Colors.white),
+                    )),
               ),
               Expanded(
-                child: Text(itineraryInfo.itiName),
+                  child: Center(
+                child: Text("Itinerary",
+                    style: TextStyle(color: Colors.white, fontSize: 24)),
+              )),
+              Expanded(
+                  child: Center(
+                child: Text(""),
+              )),
+            ],
+          ),
+        ),
+        Container(
+          padding: EdgeInsets.only(left: 10.00),
+          color: Colors.orange.shade500,
+          //width: 415.0,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Expanded(
+                child: Text(itineraryInfo.cruName,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.white)),
+              ),
+              Expanded(
+                child: Text(itineraryInfo.itiName,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.white)),
               ),
               Expanded(
                 child: Text(
-                    "Code: ${itineraryInfo.itiCode} | Night: ${itineraryInfo.itiNights}"),
+                    "Code: ${itineraryInfo.itiCode} | Night: ${itineraryInfo.itiNights}",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(color: Colors.white)),
               ),
             ],
           ),
         ),
         Container(
           padding: EdgeInsets.only(left: 20.00),
+          color: Colors.orange.shade700,
           //width: 415.0,
           child: Row(
             children: <Widget>[
               Expanded(
                   child: Center(
-                child:
-                    Text("${itineraryInfo.Type} | ${itineraryInfo.Difficulty}"),
+                child: Text(
+                    "${itineraryInfo.Type} | ${itineraryInfo.Difficulty}",
+                    style: TextStyle(color: Colors.white)),
               )),
             ],
           ),

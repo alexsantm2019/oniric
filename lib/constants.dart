@@ -27,11 +27,11 @@ const bodyTextStyle = TextStyle(
 
 const cardStatusTitleStyle = TextStyle(fontSize: 18.0, color: Colors.white);
 const cardStatusSubTitleStyle = TextStyle(fontSize: 14.0, color: Colors.white);
-const titleDetailBoatStyle = TextStyle(fontSize: 16.0);
+const titleDetailBoatStyle = TextStyle(fontSize: 20.0);
 const titleSplashStyle = TextStyle(color: Colors.white);
 
 // ESTILOS PARA TABLAS
-const titleTableStyle = TextStyle(fontSize: 16.0, color: Colors.orange);
+const titleTableStyle = TextStyle(fontSize: 16.0);
 const contentTableStyle = TextStyle(fontSize: 14.0);
 
 //ESTILOS TABLAS DISPONIBILIDAD:
