@@ -11,9 +11,10 @@ class Splash extends StatelessWidget with Helper {
       seconds: 6,
       // backgroundColor: Color.fromRGBO(4, 6, 28, 0.9),
       backgroundColor: hexStringToColor(MAIN_COLOR_ORANGE),
+      //backgroundColor: Colors.white,
       navigateAfterSeconds: new HomeScreen(),
       title: new Text(
-        'Oniric Cruises',
+        'Andean Travel Company',
         style: titleSplashStyle,
         textScaleFactor: 2,
       ),

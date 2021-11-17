@@ -5,6 +5,8 @@ import 'package:oniric/screens/NoDataScreen.dart';
 import 'package:oniric/services/services.dart';
 import 'package:oniric/widgets/availability/AvailabilityCardWidget.dart';
 import 'package:intl/intl.dart';
+import 'package:oniric/widgets/availability/AvailabilityLegendWidget.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AvailabilityWidget extends StatefulWidget {
   @override
@@ -21,10 +23,11 @@ class _AvailabilityWidget extends State<AvailabilityWidget> {
   @override
   void initState() {
     super.initState();
-    if (start == null && end == null) {
-      _setInitialDates();
-    }
-    _availabilityList = _services.getAvailability(start, end);
+    _loadDateFromPreferences();
+    // if (start == null && end == null) {
+    //   _setInitialDates();
+    // }
+    //_availabilityList = _services.getAvailability(start, end);
   }
 
   @override
@@ -47,12 +50,57 @@ class _AvailabilityWidget extends State<AvailabilityWidget> {
               } else {
                 if (snapshot.hasData && snapshot.data.isNotEmpty) {
                   List<Availability> availability = snapshot.data;
-                  return ListView.builder(
-                      itemCount: availability.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return AvailabilityCardWidget(
-                            availability: availability[index]);
-                      });
+
+                  return Column(
+                    children: <Widget>[
+                      Container(
+                        // decoration: new BoxDecoration(
+                        //     gradient: new LinearGradient(
+                        //   begin: FractionalOffset.topCenter,
+                        //   end: FractionalOffset.bottomCenter,
+                        //   colors: [
+                        //     const Color.fromARGB(255, 253, 72, 72),
+                        //     const Color.fromARGB(255, 87, 97, 249),
+                        //   ],
+                        //   stops: [0.0, 1.0],
+                        // )),
+                        //height: .0,
+                        child: Center(
+                          //children: <Widget>[
+                          child: Container(
+                              padding: EdgeInsets.all(2.0),
+                              //width: 400.0,
+                              child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: <Widget>[
+                                    AvailabilityLegendWidget()
+                                  ])),
+                          //],
+                        ),
+                      ),
+                      Expanded(
+                          child: Container(
+                        // decoration: new BoxDecoration(
+                        //     gradient: new LinearGradient(
+                        //   begin: FractionalOffset.topCenter,
+                        //   end: FractionalOffset.bottomCenter,
+                        //   colors: [
+                        //     const Color.fromARGB(255, 253, 72, 72),
+                        //     const Color.fromARGB(255, 87, 97, 249),
+                        //   ],
+                        //   stops: [0.0, 1.0],
+                        // )),
+                        child: ListView.builder(
+                            itemCount: availability.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return AvailabilityCardWidget(
+                                  availability: availability[index]);
+                            }),
+                      )),
+                    ],
+                  );
                 } else
                   return Center(
                     child: NoDataScreen(
@@ -111,9 +159,55 @@ class _AvailabilityWidget extends State<AvailabilityWidget> {
     );
   }
 
-  void _formatRangeDate() {
-    String startDate = new DateFormat("yyyy-MM-dd").format(myDateRange.start);
-    String endDate = new DateFormat("yyyy-MM-dd").format(myDateRange.end);
+  void _loadDateFromPreferences() async {
+    final prefs = await SharedPreferences.getInstance();
+
+    String newStart = new DateFormat("yyyy-MM-dd").format(DateTime.now());
+    String newEnd = new DateFormat("yyyy-MM-dd")
+        .format(DateTime.now().add(Duration(days: 28)));
+
+    var startFromPref = "";
+    var endFromPref = "";
+
+    startFromPref = prefs.getString('start');
+    endFromPref = prefs.getString('end');
+
+    if (startFromPref == null && endFromPref == null) {
+      startFromPref = newStart;
+      endFromPref = newEnd;
+    }
+    setState(() {
+      start = startFromPref;
+      end = endFromPref;
+      _availabilityList = _services.getAvailability(start, end);
+    });
+  }
+
+  void _formatRangeDate() async {
+    final prefs = await SharedPreferences.getInstance();
+    String startDateFromRange =
+        new DateFormat("yyyy-MM-dd").format(myDateRange.start);
+    String endDateFromRange =
+        new DateFormat("yyyy-MM-dd").format(myDateRange.end);
+
+    var startDate = "";
+    var endDate = "";
+    //Seteo SharedPreferences:
+    if (startDateFromRange != null && endDateFromRange != null) {
+      prefs.setString('start', startDateFromRange);
+      prefs.setString('end', endDateFromRange);
+
+      startDate = prefs.getString('start') ?? startDateFromRange;
+      endDate = prefs.getString('end') ?? endDateFromRange;
+    } else {
+      String newStart = new DateFormat("yyyy-MM-dd").format(DateTime.now());
+      String newEnd = new DateFormat("yyyy-MM-dd")
+          .format(DateTime.now().add(Duration(days: 28)));
+
+      startDate = newStart;
+      endDate = newEnd;
+    }
+
     setState(() {
       start = startDate;
       end = endDate;
@@ -121,14 +215,14 @@ class _AvailabilityWidget extends State<AvailabilityWidget> {
     });
   }
 
-  void _setInitialDates() {
-    String newStart = new DateFormat("yyyy-MM-dd").format(DateTime.now());
-    String newEnd = new DateFormat("yyyy-MM-dd")
-        .format(DateTime.now().add(Duration(days: 28)));
-    setState(() {
-      start = newStart;
-      end = newEnd;
-      _availabilityList = _services.getAvailability(start, end);
-    });
-  }
+  // void _setInitialDates() {
+  //   String newStart = new DateFormat("yyyy-MM-dd").format(DateTime.now());
+  //   String newEnd = new DateFormat("yyyy-MM-dd")
+  //       .format(DateTime.now().add(Duration(days: 28)));
+  //   setState(() {
+  //     start = newStart;
+  //     end = newEnd;
+  //     _availabilityList = _services.getAvailability(start, end);
+  //   });
+  // }
 }

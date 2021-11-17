@@ -30,6 +30,9 @@ const cardStatusSubTitleStyle = TextStyle(fontSize: 14.0, color: Colors.white);
 const titleDetailBoatStyle = TextStyle(fontSize: 20.0);
 const titleSplashStyle = TextStyle(color: Colors.white);
 
+//ESTILOS PARA LEGEND:
+const cardStatusLegendStyle = TextStyle(fontSize: 12.0, color: Colors.white);
+
 // ESTILOS PARA TABLAS
 const titleTableStyle = TextStyle(fontSize: 16.0);
 const contentTableStyle = TextStyle(fontSize: 14.0);

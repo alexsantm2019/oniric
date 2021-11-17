@@ -48,6 +48,17 @@ class _BoatMasterWidget extends State<BoatsMasterWidget> {
                       padding: EdgeInsets.all(0.0),
                       itemCount: boats.length,
                       itemBuilder: (BuildContext context, int index) {
+                        //return
+                        // Hero(
+                        //     //tag: "some_name"+index.toString(),
+                        //     //tag: boats[index],
+                        //     tag: index,
+                        //     child: BoatCardWidget(
+                        //       boat: boats[index],
+                        //       tag: index,
+                        //       onTap: showDetail,
+                        //     ));
+
                         return BoatCardWidget(
                           boat: boats[index],
                           onTap: showDetail,
@@ -75,6 +86,11 @@ class _BoatMasterWidget extends State<BoatsMasterWidget> {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return BoatDetailBoatWidget(boatInfo: val, boat: boat);
         }));
+        // Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //         builder: (BuildContext context) =>
+        //             BoatDetailBoatWidget(boatInfo: val, boat: boat)));
       }
     }).catchError((error, stackTrace) {
       final snackBar = SnackBar(

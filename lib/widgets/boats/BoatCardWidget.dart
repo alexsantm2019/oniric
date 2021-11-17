@@ -5,6 +5,7 @@ import '../../constants.dart';
 
 class BoatCardWidget extends StatelessWidget with Helper {
   final Boats boat;
+  //final int tag;
   final Function onTap;
   final Function onSwipe;
   final Function onLongPress;
@@ -12,6 +13,7 @@ class BoatCardWidget extends StatelessWidget with Helper {
   BoatCardWidget({
     Key key,
     @required this.boat,
+    //this.tag,
     this.onTap,
     this.onSwipe,
     this.onLongPress,
@@ -30,7 +32,36 @@ class BoatCardWidget extends StatelessWidget with Helper {
       child: new Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          new Card(
+          // Hero(
+          //   tag: tag,
+          //   child: Card(
+          //     child: Container(
+          //       padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+          //       height: 80,
+          //       child: Align(
+          //         alignment: Alignment.centerLeft,
+          //         child: Text(boat.vslName,
+          //             textAlign: TextAlign.center,
+          //             style: TextStyle(
+          //                 fontSize: 25,
+          //                 fontStyle: FontStyle.italic,
+          //                 color: Colors.white)),
+          //       ),
+          //       decoration: new BoxDecoration(
+          //         color: hexStringToColor(boat.vslColor != null
+          //             ? boat.vslColor
+          //             : MAIN_COLOR_ORANGE),
+          //         image: new DecorationImage(
+          //           fit: BoxFit.fitWidth,
+          //           colorFilter: new ColorFilter.mode(
+          //               Colors.black.withOpacity(0.4), BlendMode.dstATop),
+          //           image: AssetImage('images/defaultBoat.jpg'),
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // )
+          Card(
             child: Container(
               padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
               height: 80,

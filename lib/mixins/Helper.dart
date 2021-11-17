@@ -45,4 +45,10 @@ class Helper {
     }).toList();
     return slotsWithBooking;
   }
+
+  //String capitalize(String s) => s[0].toUpperCase() + s.substring(1);
+  String capitalize(String s) {
+    var string = s.toLowerCase();
+    return string[0].toUpperCase() + string.substring(1);
+  }
 }

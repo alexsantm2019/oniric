@@ -5,6 +5,7 @@ import 'package:oniric/models/Metadata.dart';
 import 'package:oniric/models/Service.dart';
 import 'package:oniric/models/Cabins.dart';
 import 'package:oniric/models/Availability.dart';
+import 'package:oniric/models/Mail.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import '../conf/configuration.dart';
@@ -276,4 +277,50 @@ class Services {
       rethrow;
     }
   }
+
+  //ENVIO DE CORREO DESDE FORMULARIO DE CONTACTO:
+
+  Future<Mail> sendMailApp(data) async {
+    //var url = 'https://profiles.andeantc.com/api/mail/sendMailApp';
+    var url = 'http://10.0.2.2:8000/api/mail/sendMailApp';
+    Map<String, String> headers = {
+      // 'Content-Type': 'application/json;charset=UTF-8',
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Charset': 'utf-8',
+      "Accept": "application/json"
+    };
+    var encoding = Encoding.getByName("utf-8");
+
+    final response =
+        await http.post(Uri.parse(url), headers: headers, body: data);
+    if (response.statusCode == 200) {
+      return Mail.fromJson(json.decode(response.body));
+    } else {
+      throw Exception('Failed to load post');
+    }
+  }
+
+  // Future<Mail> sendMailApp(data) async {
+  //   var url = 'https://profiles.andeantc.com/api/mail/sendMailApp/';
+  //   Map<String, String> headers = {
+  //     'Content-Type': 'application/json;charset=UTF-8',
+  //     'Charset': 'utf-8'
+  //   };
+  //   var encoding = Encoding.getByName("utf-8");
+  //   try {
+  //     final response = await http.post(Uri.parse(url),
+  //         headers: headers, body: jsonEncode(data), encoding: encoding);
+  //     var parsedJson = json.decode(response.body);
+  //     print("Respuesta ${parsedJson}");
+  //     if (response.statusCode == 200) {
+  //       print("Correo enviado");
+  //       return Mail.fromJson(json.decode(response.body)['data']);
+  //     } else {
+  //       throw Exception('Failed to load post');
+  //     }
+  //   } catch (e) {
+  //     print(e.toString());
+  //     rethrow;
+  //   }
+  // }
 }

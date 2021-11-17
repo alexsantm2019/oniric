@@ -7,7 +7,6 @@ import '../../constants.dart';
 import 'package:intl/intl.dart';
 import 'package:oniric/mixins/Helper.dart';
 import 'package:oniric/services/services.dart';
-
 import 'AvailabilityItineraryWidget.dart';
 
 class AvailabilityCardWidget extends StatelessWidget with Helper {
@@ -51,7 +50,7 @@ class AvailabilityCardWidget extends StatelessWidget with Helper {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(availability.cruName,
+                      Text(capitalize(availability.cruName),
                           textAlign: TextAlign.center, style: cruNameStyles),
                       Text(
                           availability.depStartDate != ''
