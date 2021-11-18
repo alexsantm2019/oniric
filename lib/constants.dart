@@ -47,6 +47,13 @@ const itineraryStyles = TextStyle(
     fontStyle: FontStyle.normal,
     fontWeight: FontWeight.bold,
     color: Colors.black);
+const priceStyles = TextStyle(
+    fontSize: 14,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.bold,
+    color: Colors.orange);
+const labelStyles =
+    TextStyle(fontSize: 12, fontStyle: FontStyle.italic, color: Colors.white);
 
 //ESTILOS TABLAS ITINERARIOS:
 const contentActivitiesDataTable =

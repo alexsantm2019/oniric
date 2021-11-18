@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:oniric/mixins/Helper.dart';
 import 'package:oniric/models/Boats.dart';
+import 'package:oniric/widgets/boats/BoatImagesWidget.dart';
 import '../../constants.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
@@ -16,7 +17,8 @@ class BoatTableWidget extends StatelessWidget with Helper {
       home: Scaffold(
           body: SingleChildScrollView(
               child: Column(children: <Widget>[
-        Image(image: AssetImage('images/defaultBoat.jpg'), fit: BoxFit.cover),
+        // Image(image: AssetImage('images/defaultBoat.jpg'), fit: BoxFit.cover),
+        BoatImagesWidget(vslId: this.boatInfo.vslId),
         AnimationLimiter(
           child: Card(
             child: Padding(

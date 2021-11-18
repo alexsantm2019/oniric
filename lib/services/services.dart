@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:oniric/models/Boats.dart';
+import 'package:oniric/models/Images.dart';
 import 'package:oniric/models/Itinerary.dart';
 import 'package:oniric/models/Metadata.dart';
 import 'package:oniric/models/Service.dart';
@@ -23,9 +24,16 @@ import '../conf/configuration.dart';
 //var response = await http.get(uri);
 
 class Services {
-  var urlVessels = Uri.https(BASE, PATH_VESSELS);
+  //var urlVessels = Uri.https(BASE, PATH_VESSELS);
+  //var urlVessels = 'http://10.0.2.2:8000/api/vessel/getAll';
 
   Future<List<Boats>> getVessels() async {
+    // try {
+    //   final response = await http.get(Uri.parse(urlVessels), headers: {
+    //     'Content-Type': 'application/json;charset=UTF-8',
+    //     'Charset': 'utf-8'
+    //   });
+    var urlVessels = Uri.https(BASE, PATH_VESSELS);
     try {
       final response = await http.get(urlVessels, headers: {
         'Content-Type': 'application/json;charset=UTF-8',
@@ -101,47 +109,6 @@ class Services {
 
 // CABINS y DECKS
 
-  // Future<List<Cabins>> getCabinsByVslId(vslId) async {
-  //   var urlCabinsByVessel =
-  //       'http://gpstest.andeantc.com/api/cabin/get-cabins-by-vessel/5';
-
-  //   try {
-  //     final response = await http.get(Uri.parse(urlCabinsByVessel), headers: {
-  //       'Content-Type': 'application/json;charset=UTF-8',
-  //       'Charset': 'utf-8'
-  //     });
-
-  //     var responseJson = json.decode(response.body);
-  //     print(responseJson);
-  //     var resp = (responseJson['data'])
-  //         .map<Cabins>((p) => Cabins.fromJson(p))
-  //         .toList();
-  //     return Future.value(resp);
-  //   } catch (e) {
-  //     print("Error en api: " + e.toString());
-  //     rethrow;
-  //   }
-  // }
-
-  // Future<List<Cabins>> getCabinsByVslId(vslId) async {
-  //   var urlCabinsByVessel =
-  //       'http://gpstest.andeantc.com/api/cabin/get-cabins-by-vessel/5';
-  //   var response = await http.get(Uri.parse(urlCabinsByVessel));
-  //   var responseJson = json.decode(response.body);
-  //   print(responseJson);
-  //   return (responseJson['datas'])
-  //       .map<Cabins>((p) => Cabins.fromJson(p))
-  //       .toList();
-  // }
-
-  // List<Cabins> getCabinsByVslId(vslId) {
-  //   List<Cabins> _listProducts;
-  //   _repo.getAll().then((value) {
-  //     if (value != null) value.forEach((item) => _listProducts.add(item));
-  //   });
-  //   return _listProducts == null ? [] : _listProducts;
-  // }
-
   Future<List<Cabins>> getCabinsByVslId(vslId) async {
     var urlCabinsByVessel =
         //    'https://gpstest.andeantc.com/api/cabin/get-cabins-by-vessel/$vslId';
@@ -197,32 +164,6 @@ class Services {
       rethrow;
     }
   }
-
-  // Future<Cabins> getCabinsByVslId(vslId) async {
-  //   var urlCabinsByVessel =
-  //       //    'https://gpstest.andeantc.com/api/cabin/get-cabins-by-vessel/$vslId';
-  //       'http://gpstest.andeantc.com/api/cabin/get-cabins-by-vessel/5'; // TODO: cambiar
-
-  //   try {
-  //     final response = await http.get(Uri.parse(urlCabinsByVessel), headers: {
-  //       'Content-Type': 'application/json;charset=UTF-8',
-  //       'Charset': 'utf-8'
-  //     });
-
-  //     final Map<String, dynamic> decodeData = json.decode(response.body);
-  //     final List<Cabins> modelList = [];
-  //     if (response.statusCode == 200) {
-  //       List jsonResponse = json.decode(response.body);
-  //       //print(jsonResponse.map((job) => new Cabins.fromJson(job)).toList());
-  //       return jsonResponse.map((job) => new Cabins.fromJson(job));
-  //     } else {
-  //       throw Exception('Failed to load post');
-  //     }
-  //   } catch (e) {
-  //     print("Error en api: " + e.toString());
-  //     rethrow;
-  //   }
-  // }
 
 // DISPONIBILIDAD - AVAILABILITY
 
@@ -300,27 +241,29 @@ class Services {
     }
   }
 
-  // Future<Mail> sendMailApp(data) async {
-  //   var url = 'https://profiles.andeantc.com/api/mail/sendMailApp/';
-  //   Map<String, String> headers = {
-  //     'Content-Type': 'application/json;charset=UTF-8',
-  //     'Charset': 'utf-8'
-  //   };
-  //   var encoding = Encoding.getByName("utf-8");
-  //   try {
-  //     final response = await http.post(Uri.parse(url),
-  //         headers: headers, body: jsonEncode(data), encoding: encoding);
-  //     var parsedJson = json.decode(response.body);
-  //     print("Respuesta ${parsedJson}");
-  //     if (response.statusCode == 200) {
-  //       print("Correo enviado");
-  //       return Mail.fromJson(json.decode(response.body)['data']);
-  //     } else {
-  //       throw Exception('Failed to load post');
-  //     }
-  //   } catch (e) {
-  //     print(e.toString());
-  //     rethrow;
-  //   }
-  // }
+  Future<List<Images>> getImagesFromVslId(vslId) async {
+    var url = 'http://10.0.2.2:8000/api/filebox/getImagesFromVslId/$vslId';
+
+    try {
+      final response = await http.get(Uri.parse(url), headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+        'Charset': 'utf-8'
+      });
+
+      final Map<String, dynamic> decodeData = json.decode(response.body);
+      final List<Images> modelList = [];
+      if (response.statusCode == 200) {
+        for (var item in decodeData['data']) {
+          final model = new Images.fromJson(item);
+          modelList.add(model);
+        }
+        return modelList;
+      } else {
+        throw Exception('Failed to load post');
+      }
+    } catch (e) {
+      print("Error en api: " + e.toString());
+      rethrow;
+    }
+  }
 }

@@ -14,7 +14,7 @@ class AvailabilityWhatsappWidget extends StatelessWidget with Helper {
         openwhatsapp(context);
       },
       child: Container(
-        padding: EdgeInsets.all(15),
+        padding: EdgeInsets.all(5),
         child: Image(
           image: AssetImage(
             'images/whatsapp.png',

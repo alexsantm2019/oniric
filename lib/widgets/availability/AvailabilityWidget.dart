@@ -5,6 +5,7 @@ import 'package:oniric/screens/NoDataScreen.dart';
 import 'package:oniric/services/services.dart';
 import 'package:oniric/widgets/availability/AvailabilityCardWidget.dart';
 import 'package:intl/intl.dart';
+import '../../constants.dart';
 import 'package:oniric/widgets/availability/AvailabilityLegendWidget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -33,6 +34,7 @@ class _AvailabilityWidget extends State<AvailabilityWidget> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter',
       home: Scaffold(
         body: Center(
@@ -66,18 +68,44 @@ class _AvailabilityWidget extends State<AvailabilityWidget> {
                         // )),
                         //height: .0,
                         child: Center(
-                          //children: <Widget>[
                           child: Container(
                               padding: EdgeInsets.all(2.0),
-                              //width: 400.0,
+                              color: Colors.grey.shade500,
+                              // child: Row(
+                              //     mainAxisAlignment: MainAxisAlignment.center,
+                              //     mainAxisSize: MainAxisSize.min,
+                              //     crossAxisAlignment: CrossAxisAlignment.center,
+                              //     children: <Widget>[
+                              //       AvailabilityLegendWidget()
+                              //     ])),
+
                               child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
                                   mainAxisSize: MainAxisSize.min,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: <Widget>[
-                                    AvailabilityLegendWidget()
+                                    Expanded(
+                                      child: Text("Departure",
+                                          textAlign: TextAlign.center,
+                                          style: labelStyles),
+                                    ),
+                                    Expanded(
+                                      child: Text("Itinerary",
+                                          textAlign: TextAlign.center,
+                                          style: labelStyles),
+                                    ),
+                                    Expanded(
+                                      child: Text("Available/Blocked/Confirmed",
+                                          textAlign: TextAlign.center,
+                                          style: labelStyles),
+                                    ),
+                                    Expanded(
+                                      child: Text("Prices",
+                                          textAlign: TextAlign.center,
+                                          style: labelStyles),
+                                    ),
                                   ])),
-                          //],
                         ),
                       ),
                       Expanded(

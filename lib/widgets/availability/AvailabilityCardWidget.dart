@@ -50,8 +50,26 @@ class AvailabilityCardWidget extends StatelessWidget with Helper {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(capitalize(availability.cruName),
-                          textAlign: TextAlign.center, style: cruNameStyles),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Icon(
+                              Icons.directions_boat_filled_outlined,
+                              color: hexStringToColor(availability.vslColor),
+                              size: 20,
+                            ),
+                            Text(capitalize(availability.cruName),
+                                textAlign: TextAlign.center,
+                                //style: cruNameStyles,
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    fontStyle: FontStyle.normal,
+                                    fontWeight: FontWeight.bold,
+                                    color: hexStringToColor(
+                                        availability.vslColor))),
+                          ]),
                       Text(
                           availability.depStartDate != ''
                               ? DateFormat.yMMMMd('en_US').format(
@@ -95,7 +113,7 @@ class AvailabilityCardWidget extends StatelessWidget with Helper {
                                 children: [
                                   Text(
                                       availability.itiCode != null
-                                          ? availability.itiCode
+                                          ? 'Itin: ' + availability.itiCode
                                           : '-',
                                       textAlign: TextAlign.center,
                                       style: itineraryStyles),
@@ -112,12 +130,10 @@ class AvailabilityCardWidget extends StatelessWidget with Helper {
                           ),
                         ),
                       ),
-                      Container(
-                        child: Text('\$ ' + availability.prices['rate'],
-                            textAlign: TextAlign.left,
-                            style: TextStyle(
-                                fontSize: 12, fontStyle: FontStyle.normal)),
-                      ),
+                      // Container(
+                      //   child: Text('\$ ' + availability.prices['rate'],
+                      //       textAlign: TextAlign.left, style: priceStyles),
+                      // ),
                     ]),
                 AvailabilityBoxesWidget(
                     num: numAvailables(availability.cabins).toString(),
@@ -131,7 +147,16 @@ class AvailabilityCardWidget extends StatelessWidget with Helper {
                     num: numConfirmed(availability.cabins).toString(),
                     color: Colors.pink.shade400,
                     description: "Confirmados"),
-                AvailabilityWhatsappWidget(),
+                Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        ' \$ ' + availability.prices['rate'],
+                        textAlign: TextAlign.right,
+                        style: priceStyles,
+                      ),
+                      AvailabilityWhatsappWidget(),
+                    ])
               ],
             ),
             new Divider(
