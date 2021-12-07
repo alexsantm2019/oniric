@@ -23,10 +23,10 @@ class _BoatMasterWidget extends State<BoatsMasterWidget> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter API and ListView Example',
+      title: 'Boats list',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        scaffoldBackgroundColor: Colors.black,
+        scaffoldBackgroundColor: Colors.grey.shade50,
       ),
       home: Scaffold(
         body: Center(
@@ -48,17 +48,6 @@ class _BoatMasterWidget extends State<BoatsMasterWidget> {
                       padding: EdgeInsets.all(0.0),
                       itemCount: boats.length,
                       itemBuilder: (BuildContext context, int index) {
-                        //return
-                        // Hero(
-                        //     //tag: "some_name"+index.toString(),
-                        //     //tag: boats[index],
-                        //     tag: index,
-                        //     child: BoatCardWidget(
-                        //       boat: boats[index],
-                        //       tag: index,
-                        //       onTap: showDetail,
-                        //     ));
-
                         return BoatCardWidget(
                           boat: boats[index],
                           onTap: showDetail,
@@ -86,16 +75,10 @@ class _BoatMasterWidget extends State<BoatsMasterWidget> {
         Navigator.push(context, MaterialPageRoute(builder: (context) {
           return BoatDetailBoatWidget(boatInfo: val, boat: boat);
         }));
-        // Navigator.push(
-        //     context,
-        //     MaterialPageRoute(
-        //         builder: (BuildContext context) =>
-        //             BoatDetailBoatWidget(boatInfo: val, boat: boat)));
       }
     }).catchError((error, stackTrace) {
       final snackBar = SnackBar(
-          content: Text(
-              "Lo sentimos. No existen datos actualizados para este país actualmente. Inténtelo más tarde"));
+          content: Text("We're sorry. There is no data for the selected boat"));
       Scaffold.of(context).showSnackBar(snackBar);
       print("Error: $error");
     });

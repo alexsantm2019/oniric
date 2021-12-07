@@ -150,11 +150,19 @@ class AvailabilityCardWidget extends StatelessWidget with Helper {
                 Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      Text(
-                        ' \$ ' + availability.prices['rate'],
-                        textAlign: TextAlign.right,
-                        style: priceStyles,
-                      ),
+                      // Text(
+                      //   ' \$ ' + availability.prices['rate'].toString() ?? 0,
+                      //   textAlign: TextAlign.right,
+                      //   style: priceStyles,
+                      // ),
+                      availability.prices['rate'] != null
+                          ? Text(
+                              ' \$ ' + availability.prices['rate'].toString(),
+                              textAlign: TextAlign.right,
+                              style: priceStyles,
+                            )
+                          : Text("\$ 0",
+                              textAlign: TextAlign.right, style: priceStyles),
                       AvailabilityWhatsappWidget(),
                     ])
               ],

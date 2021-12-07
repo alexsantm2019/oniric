@@ -12,29 +12,30 @@ class NoDataScreen extends StatelessWidget with Helper {
 
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.center,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          IconButton(
-            icon: new Icon(
-              FontAwesomeIcons.calendar,
-              size: 45,
-            ),
+    return Scaffold(
+      body: Stack(
+        fit: StackFit.expand,
+        children: [
+          Image.asset(
+            "images/errors/14_No Search Results.png",
+            fit: BoxFit.cover,
           ),
-          Text(title,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontSize: 45,
-                  fontStyle: FontStyle.italic,
-                  color: Colors.grey)),
-          Text(subTitle,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontSize: 25,
-                  fontStyle: FontStyle.italic,
-                  color: Colors.grey)),
+          Positioned(
+            bottom: MediaQuery.of(context).size.height * 0.15,
+            left: MediaQuery.of(context).size.width * 0.065,
+            right: MediaQuery.of(context).size.width * 0.065,
+            child: Container(
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    offset: Offset(0, 13),
+                    blurRadius: 25,
+                    color: Color(0xFF5666C2).withOpacity(0.17),
+                  ),
+                ],
+              ),
+            ),
+          )
         ],
       ),
     );

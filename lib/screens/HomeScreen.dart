@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:oniric/screens/NoDataScreen.dart';
 import 'package:oniric/widgets/availability/AvailabilityWidget.dart';
 import 'package:oniric/widgets/boats/BoatsMasterWidget.dart';
 import 'package:oniric/widgets/contact/ContactWidget.dart';
@@ -7,10 +8,13 @@ import '../constants.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatelessWidget with Helper {
+  static String routeName;
+
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context);
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: DefaultTabController(
         length: 3,
         child: Scaffold(
@@ -21,14 +25,20 @@ class HomeScreen extends StatelessWidget with Helper {
                 Container(
                   padding: const EdgeInsets.all(10.0),
                   child: Image.asset('images/logo-atc-white.png',
-                      width: 150, height: 70, fit: BoxFit.fill),
+                      width: 133, height: 55, fit: BoxFit.fill),
                 )
               ],
             ),
             backgroundColor: hexStringToColor(MAIN_COLOR_ORANGE),
             bottom: TabBar(
               indicatorColor: Colors.white,
-              indicatorWeight: 5,
+              indicatorWeight: 1,
+              //indicatorPadding: EdgeInsets.only(left: 10, right: 10),
+              indicator: BoxDecoration(
+                  gradient: LinearGradient(
+                      colors: [Colors.redAccent, Colors.orangeAccent]),
+                  borderRadius: BorderRadius.circular(5),
+                  color: hexStringToColor(MAIN_COLOR_ORANGE)),
               tabs: [
                 Tab(text: "Availability", icon: Icon(Icons.checklist_sharp)),
                 Tab(text: 'Boats', icon: Icon(Icons.directions_boat_filled)),
@@ -39,7 +49,7 @@ class HomeScreen extends StatelessWidget with Helper {
           body: TabBarView(
             children: [
               AvailabilityWidget(),
-              //AvailabilityPickerWidget(),
+              //NoDataScreen(title: "hola", subTitle: "este es un error"),
               BoatsMasterWidget(),
               ContactWidget(),
             ],

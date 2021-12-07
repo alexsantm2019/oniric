@@ -1,9 +1,24 @@
 const BASE = "gpstest.andeantc.com";
+const BASE_MAIL = "profiles.andeantc.com";
+
+//BARCOS
 const PATH_VESSELS = '/api/vessel/getAll';
+//DETALLE BARCOS
 const PATH_GET_VESSEL_INFO = '/api/vessel/get-vessel-id/';
+//SERVICIOS DE BARCOS:
 const PATH_GET_VESSEL_SERVICES = '/api/service/get-vessel-services/';
-const PATH_COUNTRIES = 'countries';
-const PATH_COUNTRIES_LIVE = 'api.covid19api.com/live/country';
+//SERVICIOS DE BARCOS:
+const PATH_GET_CABINS_BY_VESSEL = '/api/cabin/get-cabins-by-vessel/';
+//CATALOGO:
+const PATH_CATALOGO = '/api/metadata/getMetadataByGroup/';
+//DISPONIBILIDAD:
+const PATH_AVAILABILITY = '/api/availability/get-availability';
+//ITINERARIES:
+const PATH_ITINERARY = '/api/itinerary/';
+//SEND MAIL:
+const PATH_MAIL = '/api/mail/sendMailApp';
+//IMAGES:
+const PATH_IMAGES = '/api/filebox/getImagesFromVslId/';
 
 const VESSELS_DEFAULT = [
   'images/default_slider_boats/vessel1.jpg',

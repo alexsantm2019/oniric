@@ -119,8 +119,10 @@ class AvailabilityItineraryWidget extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           for (var it in item['activities'])
-                            Text(it['activityName'].toString(),
-                                style: contentActivitiesDataTable),
+                            Flexible(
+                              child: Text(it['activityName'].toString(),
+                                  style: contentActivitiesDataTable),
+                            ),
                         ],
                       ),
                     ),

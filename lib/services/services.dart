@@ -28,11 +28,6 @@ class Services {
   //var urlVessels = 'http://10.0.2.2:8000/api/vessel/getAll';
 
   Future<List<Boats>> getVessels() async {
-    // try {
-    //   final response = await http.get(Uri.parse(urlVessels), headers: {
-    //     'Content-Type': 'application/json;charset=UTF-8',
-    //     'Charset': 'utf-8'
-    //   });
     var urlVessels = Uri.https(BASE, PATH_VESSELS);
     try {
       final response = await http.get(urlVessels, headers: {
@@ -57,10 +52,9 @@ class Services {
   }
 
   Future<Boats> getBoatInfo(vslId) async {
-    var urlVesselById =
-        'https://gpstest.andeantc.com/api/vessel/get-vessel-id/$vslId';
+    var urlVesselById = Uri.https(BASE, PATH_GET_VESSEL_INFO + '${vslId}');
     try {
-      final response = await http.get(Uri.parse(urlVesselById), headers: {
+      final response = await http.get(urlVesselById, headers: {
         'Content-Type': 'application/json;charset=UTF-8',
         'Charset': 'utf-8'
       });
@@ -81,11 +75,9 @@ class Services {
 // SERVICIOS
 
   Future<List<Service>> getServicesByVslId(vslId) async {
-    var urlServicesByVessel =
-        'https://gpstest.andeantc.com/api/service/get-vessel-services/$vslId';
-
+    var url = Uri.https(BASE, PATH_GET_VESSEL_SERVICES + '${vslId}');
     try {
-      final response = await http.get(Uri.parse(urlServicesByVessel), headers: {
+      final response = await http.get(url, headers: {
         'Content-Type': 'application/json;charset=UTF-8',
         'Charset': 'utf-8'
       });
@@ -110,12 +102,9 @@ class Services {
 // CABINS y DECKS
 
   Future<List<Cabins>> getCabinsByVslId(vslId) async {
-    var urlCabinsByVessel =
-        //    'https://gpstest.andeantc.com/api/cabin/get-cabins-by-vessel/$vslId';
-        'http://gpstest.andeantc.com/api/cabin/get-cabins-by-vessel/5'; // TODO: cambiar
-
+    var url = Uri.https(BASE, PATH_GET_CABINS_BY_VESSEL + '${vslId}');
     try {
-      final response = await http.get(Uri.parse(urlCabinsByVessel), headers: {
+      final response = await http.get(url, headers: {
         'Content-Type': 'application/json;charset=UTF-8',
         'Charset': 'utf-8'
       });
@@ -138,11 +127,9 @@ class Services {
   }
 
   Future<List<Metadata>> getCatalogo(group) async {
-    var url =
-        'https://gpstest.andeantc.com/api/metadata/getMetadataByGroup/$group';
-
+    var url = Uri.https(BASE, PATH_CATALOGO + '${group}');
     try {
-      final response = await http.get(Uri.parse(url), headers: {
+      final response = await http.get(url, headers: {
         'Content-Type': 'application/json;charset=UTF-8',
         'Charset': 'utf-8'
       });
@@ -168,14 +155,18 @@ class Services {
 // DISPONIBILIDAD - AVAILABILITY
 
   Future<List<Availability>> getAvailability(start, end) async {
-    print('===================Consultando API=========================');
-    print("Modificando fecha: Start: $start End: $end");
-    var urlAvailability =
-        //'https://gpstest.andeantc.com/api/cabin/get-cabins-by-vessel/$vslId';
-        'http://gpstest.andeantc.com/api/availability/get-availability?start=$start&end=$end'; // TODO: cambiar
+    var url = Uri(
+      scheme: 'https',
+      host: BASE,
+      path: PATH_AVAILABILITY,
+      queryParameters: {
+        'start': start,
+        'end': end,
+      },
+    );
 
     try {
-      final response = await http.get(Uri.parse(urlAvailability), headers: {
+      final response = await http.get(url, headers: {
         'Content-Type': 'application/json;charset=UTF-8',
         'Charset': 'utf-8'
       });
@@ -200,10 +191,9 @@ class Services {
   //ITINERARIOS:
 
   Future<Itinerary> getItinerariesByItiId(itiId) async {
-    var urlItinerary =
-        'https://gpstest.andeantc.com/api/itinerary/$itiId/summary-full';
+    var url = Uri.https(BASE, PATH_ITINERARY + '${itiId}/summary-full');
     try {
-      final response = await http.get(Uri.parse(urlItinerary), headers: {
+      final response = await http.get(url, headers: {
         'Content-Type': 'application/json;charset=UTF-8',
         'Charset': 'utf-8'
       });
@@ -222,8 +212,7 @@ class Services {
   //ENVIO DE CORREO DESDE FORMULARIO DE CONTACTO:
 
   Future<Mail> sendMailApp(data) async {
-    //var url = 'https://profiles.andeantc.com/api/mail/sendMailApp';
-    var url = 'http://10.0.2.2:8000/api/mail/sendMailApp';
+    var url = Uri.https(BASE_MAIL, PATH_MAIL);
     Map<String, String> headers = {
       // 'Content-Type': 'application/json;charset=UTF-8',
       'Content-Type': 'application/x-www-form-urlencoded',
@@ -232,8 +221,7 @@ class Services {
     };
     var encoding = Encoding.getByName("utf-8");
 
-    final response =
-        await http.post(Uri.parse(url), headers: headers, body: data);
+    final response = await http.post(url, headers: headers, body: data);
     if (response.statusCode == 200) {
       return Mail.fromJson(json.decode(response.body));
     } else {
@@ -242,10 +230,9 @@ class Services {
   }
 
   Future<List<Images>> getImagesFromVslId(vslId) async {
-    var url = 'http://10.0.2.2:8000/api/filebox/getImagesFromVslId/$vslId';
-
+    var url = Uri.https(BASE, PATH_IMAGES + '${vslId}');
     try {
-      final response = await http.get(Uri.parse(url), headers: {
+      final response = await http.get(url, headers: {
         'Content-Type': 'application/json;charset=UTF-8',
         'Charset': 'utf-8'
       });

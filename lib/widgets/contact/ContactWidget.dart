@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:oniric/mixins/Helper.dart';
-//import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:oniric/mixins/InputValidation.dart';
 import 'package:oniric/services/services.dart';
 import 'package:oniric/widgets/contact/CountryListPickWidget.dart';
@@ -11,33 +10,22 @@ import 'package:intl/intl.dart';
 import '../../constants.dart';
 
 class ContactWidget extends StatelessWidget with InputValidation, Helper {
-  // final Function onTap;
-  // final Function onSwipe;
-  // final Function onLongPress;
   final formGlobalKey = GlobalKey<FormState>();
   String countryCode = "";
-  TextEditingController countryController =
-      TextEditingController(text: 'Pais ejemplo');
-  TextEditingController nameController =
-      TextEditingController(text: 'Nombre Ejemplo');
-  TextEditingController mobileController =
-      TextEditingController(text: '0999035193');
-  TextEditingController emailController =
-      TextEditingController(text: 'asm_ec@hotmail.com');
-  TextEditingController requestController =
-      TextEditingController(text: 'Soy un texto de ejemplo');
+  TextEditingController countryController = TextEditingController(text: '');
+  TextEditingController nameController = TextEditingController(text: '');
+  TextEditingController mobileController = TextEditingController(text: '');
+  TextEditingController emailController = TextEditingController(text: '');
+  TextEditingController requestController = TextEditingController(text: '');
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('Contact us'),
-      // ),
       body: Container(
         decoration: new BoxDecoration(
           //color: const Color(0xff7c94b6),
           image: new DecorationImage(
-            fit: BoxFit.cover,
+            fit: BoxFit.fitHeight,
             colorFilter: new ColorFilter.mode(
                 Colors.white.withOpacity(0.2), BlendMode.dstATop),
             image: AssetImage("images/contact.jpeg"),
@@ -50,7 +38,7 @@ class ContactWidget extends StatelessWidget with InputValidation, Helper {
             key: formGlobalKey,
             child: Column(
               children: [
-                SizedBox(height: 15),
+                //SizedBox(height: 15),
                 CountryListPickWidget(
                     onSelectCountry: (String country, String code) {
                   countryController.text = country;
@@ -103,11 +91,7 @@ class ContactWidget extends StatelessWidget with InputValidation, Helper {
                       onPressed: () {
                         if (formGlobalKey.currentState.validate()) {
                           formGlobalKey.currentState.save();
-                          //sendMail();
                           sendMailApp(context);
-                          // final snackBar =
-                          //     SnackBar(content: Text("Email sended"));
-                          // Scaffold.of(context).showSnackBar(snackBar);
                         }
                       },
                       style: ElevatedButton.styleFrom(
@@ -143,7 +127,7 @@ class ContactWidget extends StatelessWidget with InputValidation, Helper {
       if (val != null) {
         final snackBar = SnackBar(content: Text("Email sended successfully"));
         Scaffold.of(context).showSnackBar(snackBar);
-        //cleanFields();
+        cleanFields();
       }
     }).catchError((error, stackTrace) {
       final snackBar = SnackBar(content: Text("Sorry, email was not sended"));
@@ -158,28 +142,4 @@ class ContactWidget extends StatelessWidget with InputValidation, Helper {
     emailController.clear();
     requestController.clear();
   }
-
-  // void sendMail() async {
-  //   String username = 'alexis.m@andeantc.com';
-  //   String password = 'rqqnfpzkqingrwfc';
-
-  //   //String nowDate = DateFormat('yyyy-MM-dd – kk:mm').format(DateTime.now());
-  //   String nowDate = DateFormat.yMMMMd('en_US').format(DateTime.now());
-  //   String nowTime = DateFormat.jm().format(DateTime.now());
-  //   String fullDate = nowDate + '(' + nowTime + ')';
-
-  //   final smtpServer = gmail(username, password);
-  //   final equivalentMessage = Message()
-  //     ..from = Address(username, 'Contact from app')
-  //     ..recipients.add(Address('alexis.m@andeantc.com'))
-  //     // ..ccRecipients
-  //     //     .addAll([Address('asm_ec@hotmail.com'), 'asm_ec@hotmail.com'])
-  //     // ..bccRecipients.add('asm_ec@hotmail.com')
-  //     //..subject = 'New request from app - ${DateTime.now()}'
-  //     ..subject = 'New request from app - ${fullDate}'
-  //     ..text = 'This is the plain text.\nThis is line 2 of the text part.'
-  //     ..html = "<h1>Request</h1>\n<p>Hey! ${requestController}</p>";
-
-  //   await send(equivalentMessage, smtpServer);
-  // }
 }
