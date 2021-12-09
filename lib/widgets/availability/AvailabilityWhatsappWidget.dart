@@ -40,14 +40,14 @@ class AvailabilityWhatsappWidget extends StatelessWidget with Helper {
         await launch(whatappURL_ios, forceSafariVC: false);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: new Text("whatsapp no installed for IOs")));
+            SnackBar(content: new Text("Whatsapp no installed for IOs")));
       }
     } else {
       if (await canLaunch(whatsappURl_android)) {
         await launch(whatsappURl_android);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: new Text("whatsapp no installed for Android")));
+            SnackBar(content: new Text("Whatsapp no installed for Android")));
       }
     }
   }
