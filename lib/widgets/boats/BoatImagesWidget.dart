@@ -31,7 +31,7 @@ class _BoatImagesWidget extends State<BoatImagesWidget> {
               return new CircularProgressIndicator();
             } else {
               if (snapshot.hasError) {
-                return new Text("fetch error");
+                return new Text("Error loading images...");
               } else {
                 List<Images> img = snapshot.data;
                 if (img.length > 0) {
@@ -48,16 +48,13 @@ class _BoatImagesWidget extends State<BoatImagesWidget> {
                         aspectRatio: 5.0,
                       ),
                       itemBuilder: (context, i, id) {
-                        //for onTap to redirect to another screen
                         return GestureDetector(
                           child: Container(
-                            //child: Text(img[i].arcPath.toString()),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15),
                                 border: Border.all(
                                   color: Colors.white,
                                 )),
-                            //ClipRRect for image border radius
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(15),
                               child: Image.network(

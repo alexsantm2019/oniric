@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 import '../../constants.dart';
 import 'package:oniric/widgets/availability/AvailabilityLegendWidget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
 class AvailabilityWidget extends StatefulWidget {
   @override
@@ -25,118 +26,111 @@ class _AvailabilityWidget extends State<AvailabilityWidget> {
   void initState() {
     super.initState();
     _loadDateFromPreferences();
-    // if (start == null && end == null) {
-    //   _setInitialDates();
-    // }
-    //_availabilityList = _services.getAvailability(start, end);
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter',
+      title: 'Availability',
       home: Scaffold(
-        body: Center(
-          child: FutureBuilder<List<Availability>>(
-            future: _availabilityList,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting)
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              else if (snapshot.hasError) {
-                return Center(
-                  child: Text("ERROR: ${snapshot.error}"),
-                );
-              } else {
-                if (snapshot.hasData && snapshot.data.isNotEmpty) {
-                  List<Availability> availability = snapshot.data;
-
-                  return Column(
-                    children: <Widget>[
-                      Container(
-                        // decoration: new BoxDecoration(
-                        //     gradient: new LinearGradient(
-                        //   begin: FractionalOffset.topCenter,
-                        //   end: FractionalOffset.bottomCenter,
-                        //   colors: [
-                        //     const Color.fromARGB(255, 253, 72, 72),
-                        //     const Color.fromARGB(255, 87, 97, 249),
-                        //   ],
-                        //   stops: [0.0, 1.0],
-                        // )),
-                        //height: .0,
-                        child: Center(
-                          child: Container(
-                              padding: EdgeInsets.all(2.0),
-                              color: Colors.grey.shade500,
-                              // child: Row(
-                              //     mainAxisAlignment: MainAxisAlignment.center,
-                              //     mainAxisSize: MainAxisSize.min,
-                              //     crossAxisAlignment: CrossAxisAlignment.center,
-                              //     children: <Widget>[
-                              //       AvailabilityLegendWidget()
-                              //     ])),
-
-                              child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: <Widget>[
-                                    Expanded(
-                                      child: Text("Departure",
-                                          textAlign: TextAlign.center,
-                                          style: labelStyles),
-                                    ),
-                                    Expanded(
-                                      child: Text("Itinerary",
-                                          textAlign: TextAlign.center,
-                                          style: labelStyles),
-                                    ),
-                                    Expanded(
-                                      child: Text("Available/Blocked/Confirmed",
-                                          textAlign: TextAlign.center,
-                                          style: labelStyles),
-                                    ),
-                                    Expanded(
-                                      child: Text("Prices",
-                                          textAlign: TextAlign.center,
-                                          style: labelStyles),
-                                    ),
-                                  ])),
-                        ),
-                      ),
-                      Expanded(
-                          child: Container(
-                        // decoration: new BoxDecoration(
-                        //     gradient: new LinearGradient(
-                        //   begin: FractionalOffset.topCenter,
-                        //   end: FractionalOffset.bottomCenter,
-                        //   colors: [
-                        //     const Color.fromARGB(255, 253, 72, 72),
-                        //     const Color.fromARGB(255, 87, 97, 249),
-                        //   ],
-                        //   stops: [0.0, 1.0],
-                        // )),
-                        child: ListView.builder(
-                            itemCount: availability.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return AvailabilityCardWidget(
-                                  availability: availability[index]);
-                            }),
-                      )),
-                    ],
-                  );
-                } else
+        body: AnimatedContainer(
+          duration: const Duration(seconds: 10),
+          curve: Curves.fastOutSlowIn,
+          child: Center(
+            child: FutureBuilder<List<Availability>>(
+              future: _availabilityList,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting)
                   return Center(
-                    child: NoDataScreen(
-                        title: "No Availability",
-                        subTitle: "Try with different dates"),
+                    child: CircularProgressIndicator(),
                   );
-              }
-            },
+                else if (snapshot.hasError) {
+                  return Center(
+                    child: Text("ERROR: ${snapshot.error}"),
+                  );
+                } else {
+                  if (snapshot.hasData && snapshot.data.isNotEmpty) {
+                    List<Availability> availability = snapshot.data;
+
+                    return Column(
+                      children: <Widget>[
+                        Container(
+                          // decoration: new BoxDecoration(
+                          //     gradient: new LinearGradient(
+                          //   begin: FractionalOffset.topCenter,
+                          //   end: FractionalOffset.bottomCenter,
+                          //   colors: [
+                          //     const Color.fromARGB(255, 253, 72, 72),
+                          //     const Color.fromARGB(255, 87, 97, 249),
+                          //   ],
+                          //   stops: [0.0, 1.0],
+                          // )),
+                          //height: .0,
+                          child: Center(
+                            child: Container(
+                                padding: EdgeInsets.all(2.0),
+                                color: Colors.grey.shade500,
+                                child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: <Widget>[
+                                      Expanded(
+                                        child: Text("Departure",
+                                            textAlign: TextAlign.center,
+                                            style: labelStyles),
+                                      ),
+                                      Expanded(
+                                        child: Text("Itinerary",
+                                            textAlign: TextAlign.center,
+                                            style: labelStyles),
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                            "Available/Blocked/Confirmed",
+                                            textAlign: TextAlign.center,
+                                            style: labelStyles),
+                                      ),
+                                      Expanded(
+                                        child: Text("Prices",
+                                            textAlign: TextAlign.center,
+                                            style: labelStyles),
+                                      ),
+                                    ])),
+                          ),
+                        ),
+                        Expanded(
+                            child: Container(
+                          child: ListView.builder(
+                              itemCount: availability.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return AnimationConfiguration.staggeredList(
+                                  position: index,
+                                  duration: const Duration(milliseconds: 1200),
+                                  child: SlideAnimation(
+                                    verticalOffset: 100.0,
+                                    child: FadeInAnimation(
+                                      child: AvailabilityCardWidget(
+                                          availability: availability[index]),
+                                    ),
+                                  ),
+                                );
+                              }),
+                        )),
+                      ],
+                    );
+                  } else
+                    return Center(
+                      child: NoDataScreen(
+                          title: "No Availability",
+                          subTitle: "Try with different dates"),
+                    );
+                }
+              },
+            ),
           ),
         ),
         floatingActionButton: FloatingActionButton(

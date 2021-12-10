@@ -29,7 +29,6 @@ class _BoatServicesWidget extends State<BoatServicesWidget> {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      // padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
       duration: const Duration(seconds: 10),
       curve: Curves.fastOutSlowIn,
       child: FutureBuilder<List<Service>>(

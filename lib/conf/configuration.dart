@@ -20,6 +20,9 @@ const PATH_MAIL = '/api/mail/sendMailApp';
 //IMAGES:
 const PATH_IMAGES = '/api/filebox/getImagesFromVslId/';
 
+//WHATSAPP CONTACT:
+const WHATSAPP_CONTACT = '+593998974711';
+
 const VESSELS_DEFAULT = [
   'images/default_slider_boats/vessel1.jpg',
   'images/default_slider_boats/vessel2.jpg',

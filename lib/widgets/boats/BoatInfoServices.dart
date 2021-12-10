@@ -14,7 +14,8 @@ class BoatInfoServicesWidget extends StatelessWidget with Helper {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 5,
-      child: Card(
+      child: new Card(
+        //color: Colors.transparent,
         semanticContainer: true,
         clipBehavior: Clip.antiAliasWithSaveLayer,
         // Con esta propiedad modificamos la forma de nuestro card

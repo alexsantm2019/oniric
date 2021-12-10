@@ -25,7 +25,7 @@ const bodyTextStyle = TextStyle(
   fontSize: 15.0,
 );
 
-const cardStatusTitleStyle = TextStyle(fontSize: 18.0, color: Colors.white);
+const cardStatusTitleStyle = TextStyle(fontSize: 15.0, color: Colors.white);
 const cardStatusSubTitleStyle = TextStyle(fontSize: 14.0, color: Colors.white);
 const titleDetailBoatStyle = TextStyle(fontSize: 20.0);
 const titleSplashStyle = TextStyle(color: Colors.white);
@@ -43,12 +43,12 @@ const cruNameStyles = TextStyle(
 const departuresDatesStyles =
     TextStyle(fontSize: 11, fontStyle: FontStyle.normal);
 const itineraryStyles = TextStyle(
-    fontSize: 12,
+    fontSize: 10,
     fontStyle: FontStyle.normal,
     fontWeight: FontWeight.bold,
     color: Colors.black);
 const priceStyles = TextStyle(
-    fontSize: 14,
+    fontSize: 13,
     fontStyle: FontStyle.normal,
     fontWeight: FontWeight.bold,
     color: Colors.orange);

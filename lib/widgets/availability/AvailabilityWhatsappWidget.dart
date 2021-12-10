@@ -1,54 +1,67 @@
 import 'package:flutter/material.dart';
+import 'package:oniric/models/Availability.dart';
 import '../../constants.dart';
 import 'package:oniric/mixins/Helper.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:io';
+import '../../conf/configuration.dart';
+
+//class AvailabilityWhatsappWidget extends StatelessWidget with Helper {
 
 class AvailabilityWhatsappWidget extends StatelessWidget with Helper {
+  final Availability availability;
+
+  AvailabilityWhatsappWidget({
+    Key key,
+    @required this.availability,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return new SafeArea(
         child: GestureDetector(
       onTap: () {
-        print("Haciendo tap");
         openwhatsapp(context);
       },
       child: Container(
         padding: EdgeInsets.all(5),
-        child: Image(
-          image: AssetImage(
-            'images/whatsapp.png',
+        child: const Align(
+          alignment: Alignment.center,
+          child: Image(
+            image: AssetImage(
+              'images/whatsapp.png',
+            ),
+            width: 25,
+            height: 25,
+            fit: BoxFit.cover,
           ),
-          width: 25,
-          height: 25,
-          fit: BoxFit.cover,
         ),
       ),
     ));
   }
 
   openwhatsapp(context) async {
-    var whatsapp = "+593999035193";
-    var message = "Hola";
-    var whatsappURl_android =
-        "whatsapp://send?phone=" + whatsapp + "&text=hello";
+    //var whatsapp = "+593999035193";
+    var whatsapp = WHATSAPP_CONTACT;
+    var departureInfo =
+        availability.depStartDate + ' to ' + availability.depEndDate;
+    var vessel = availability.cruName;
+    print(whatsapp);
+    var message =
+        "Hi, I like more information about reservations for ${vessel.toUpperCase()} boat from ${departureInfo}";
 
-    var whatappURL_ios = "https://wa.me/$whatsapp?text=${Uri.parse("hello")}";
+    // var whatsappURl_android =
+    //     "https://api.whatsapp.com/send?phone=$whatsapp='${Uri.parse(message)}'"; // new line
+
+    var whatsappURl_android =
+        "https://wa.me/$whatsapp?text='${Uri.parse(message)}'";
+    var whatappURL_ios = "https://wa.me/$whatsapp?text='${Uri.parse(message)}'";
+
     if (Platform.isIOS) {
       // for iOS phone only
-      if (await canLaunch(whatappURL_ios)) {
-        await launch(whatappURL_ios, forceSafariVC: false);
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: new Text("Whatsapp no installed for IOs")));
-      }
+      await launch(whatappURL_ios, forceSafariVC: false);
     } else {
-      if (await canLaunch(whatsappURl_android)) {
-        await launch(whatsappURl_android);
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: new Text("Whatsapp no installed for Android")));
-      }
+      await launch(whatsappURl_android, forceSafariVC: false);
     }
   }
 }

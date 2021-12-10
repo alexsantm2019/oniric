@@ -21,6 +21,26 @@ class BoatDetailBoatWidget extends StatelessWidget with Helper {
         length: 3,
         child: Scaffold(
           appBar: AppBar(
+            automaticallyImplyLeading: true, // hides default back button
+            // (*) Degradado:
+            flexibleSpace: Container(
+                decoration: BoxDecoration(
+              gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.topRight,
+                  colors: [
+                    hexStringToColor(boatInfo.vslColor != null
+                        ? boatInfo.vslColor
+                        : MAIN_COLOR_ORANGE),
+                    Color(0xFFFF),
+                  ]),
+            )),
+            // (*) Color standar en appBar
+            //backgroundColor: hexStringToColor(MAIN_COLOR_ORANGE),
+            // backgroundColor: hexStringToColor(boatInfo.vslColor != null
+            //     ? boatInfo.vslColor
+            //     : MAIN_COLOR_ORANGE),
+            centerTitle: true,
             title: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -33,10 +53,7 @@ class BoatDetailBoatWidget extends StatelessWidget with Helper {
                     child: Text(boatInfo.vslName, style: titleDetailBoatStyle))
               ],
             ),
-            //backgroundColor: hexStringToColor(MAIN_COLOR_ORANGE),
-            backgroundColor: hexStringToColor(boatInfo.vslColor != null
-                ? boatInfo.vslColor
-                : MAIN_COLOR_ORANGE),
+
             bottom: TabBar(
               indicatorColor: Colors.white,
               indicatorWeight: 5,
@@ -50,18 +67,11 @@ class BoatDetailBoatWidget extends StatelessWidget with Helper {
           ),
           body: TabBarView(
             children: [
-              //Text("Servicios"),
               BoatTableWidget(
                 boatInfo: boatInfo,
               ),
               BoatServicesWidget(vslId: vslId, boatColor: boatInfo.vslColor),
               BoatCabinsWidget(vslId: vslId, boatColor: boatInfo.vslColor),
-              // BoatDecksWidget(
-              //   boatInfo: boatInfo,
-              // ),
-              // BoatCabinsWidget(
-              //   boatInfo: boatInfo,
-              // ),
             ],
           ),
         ),

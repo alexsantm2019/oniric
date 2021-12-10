@@ -71,6 +71,9 @@ class ContactWidget extends StatelessWidget with InputValidation, Helper {
                 TextFormField(
                   controller: emailController,
                   decoration: InputDecoration(labelText: "Email"),
+                  inputFormatters: [
+                    FilteringTextInputFormatter.deny(new RegExp(r"\s\b|\b\s"))
+                  ],
                   validator: (email) {
                     if (isEmailValid(email))
                       return null;

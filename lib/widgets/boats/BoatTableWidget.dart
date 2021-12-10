@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:oniric/mixins/Helper.dart';
 import 'package:oniric/models/Boats.dart';
 import 'package:oniric/widgets/boats/BoatImagesWidget.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../constants.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 
@@ -45,8 +46,44 @@ class BoatTableWidget extends StatelessWidget with Helper {
                     ]),
                     Column(children: [
                       Text(
-                          '${boatInfo.vslName != null ? boatInfo.vslName : "No Name"}',
+                          '${boatInfo.vslName != null ? boatInfo.vslName : "No Name added"}',
                           style: contentTableStyle)
+                    ]),
+                  ]),
+                  TableRow(children: [
+                    Column(children: [
+                      Text('Alias',
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              color: hexStringToColor(boatInfo.vslColor != null
+                                  ? boatInfo.vslColor
+                                  : MAIN_COLOR_ORANGE)))
+                    ]),
+                    Column(children: [
+                      Text(
+                          '${boatInfo.vslAlias != null ? boatInfo.vslAlias : "No alias added"}',
+                          style: contentTableStyle)
+                    ]),
+                  ]),
+                  TableRow(children: [
+                    Column(children: [
+                      Text('Web site',
+                          style: TextStyle(
+                              fontSize: 16.0,
+                              color: hexStringToColor(boatInfo.vslColor != null
+                                  ? boatInfo.vslColor
+                                  : MAIN_COLOR_ORANGE)))
+                    ]),
+                    Column(children: [
+                      boatInfo.vslWebsite != null
+                          ? FlatButton(
+                              onPressed: () => _launchURL(
+                                  context, boatInfo.vslWebsite.toString()),
+                              child: Text(boatInfo.vslWebsite,
+                                  style: TextStyle(
+                                      fontSize: 11.0, color: Colors.blue)),
+                            )
+                          : Text("No web site added", style: contentTableStyle)
                     ]),
                   ]),
                   TableRow(children: [
@@ -77,12 +114,6 @@ class BoatTableWidget extends StatelessWidget with Helper {
                           '${boatInfo.vslCapacity.toString() ?? "No capacity added"}')
                     ]),
                   ]),
-                  // TableRow(children: [
-                  //   Column(children: [Text('Category', style: titleTableStyle)]),
-                  //   Column(children: [
-                  //     Text('${boatInfo.vslCategory ?? "No category added"}')
-                  //   ]),
-                  // ]),
                   TableRow(children: [
                     Column(children: [
                       Text('Model',
@@ -113,7 +144,7 @@ class BoatTableWidget extends StatelessWidget with Helper {
                   ]),
                   TableRow(children: [
                     Column(children: [
-                      Text('Power',
+                      Text('Power (HP)',
                           style: TextStyle(
                               fontSize: 16.0,
                               color: hexStringToColor(boatInfo.vslColor != null
@@ -127,7 +158,7 @@ class BoatTableWidget extends StatelessWidget with Helper {
                   ]),
                   TableRow(children: [
                     Column(children: [
-                      Text('Speed',
+                      Text('Speed (KN)',
                           style: TextStyle(
                               fontSize: 16.0,
                               color: hexStringToColor(boatInfo.vslColor != null
@@ -141,7 +172,7 @@ class BoatTableWidget extends StatelessWidget with Helper {
                   ]),
                   TableRow(children: [
                     Column(children: [
-                      Text('Length',
+                      Text('Length (m)',
                           style: TextStyle(
                               fontSize: 16.0,
                               color: hexStringToColor(boatInfo.vslColor != null
@@ -155,7 +186,7 @@ class BoatTableWidget extends StatelessWidget with Helper {
                   ]),
                   TableRow(children: [
                     Column(children: [
-                      Text('Width',
+                      Text('Width (m)',
                           style: TextStyle(
                               fontSize: 16.0,
                               color: hexStringToColor(boatInfo.vslColor != null
@@ -184,5 +215,18 @@ class BoatTableWidget extends StatelessWidget with Helper {
         )
       ]))),
     );
+  }
+
+  _launchURL(context, String url) async {
+    await launch(url);
+    if (!url.contains('http')) url = 'http://$url';
+    await launch(url);
+    // if (await canLaunch(url)) {
+    //   await launch(url);
+    // } else {
+    //   ScaffoldMessenger.of(context)
+    //       .showSnackBar(SnackBar(content: new Text('Could not launch $url')));
+    //   return;
+    // }
   }
 }

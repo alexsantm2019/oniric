@@ -4,6 +4,7 @@ class Boats {
   final String vslAlias;
   final String vslDescription;
   final String vslColor;
+  final String vslWebsite;
 
   final int vslCapacity;
   //final String vslCategory;
@@ -20,6 +21,7 @@ class Boats {
     this.vslAlias,
     this.vslDescription,
     this.vslColor,
+    this.vslWebsite,
     this.vslCapacity,
     //this.vslCategory,
     this.vslModel,
@@ -37,6 +39,7 @@ class Boats {
       vslAlias: json['vslAlias'],
       vslDescription: json['vslDescription'],
       vslColor: json['vslColor'],
+      vslWebsite: json['vslWebsite'],
       vslCapacity: json['vslCapacity'],
       // vslCategory: json['vslCategory'],
       vslModel: json['vslModel'],
@@ -56,6 +59,7 @@ class Boats {
     data['vslAlias'] = this.vslAlias;
     data['vslDescription'] = this.vslDescription;
     data['vslColor'] = this.vslColor;
+    data['vslWebsite'] = this.vslWebsite;
     data['vslCapacity'] = this.vslCapacity;
     //data['vslCategory'] = this.vslCategory;
     data['vslModel'] = this.vslModel;

@@ -11,18 +11,6 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import '../conf/configuration.dart';
 
-// investigar
-
-// var uri = Uri(
-//   scheme: 'https',
-//   host: 'example.com',
-//   path: '/foo/bar',
-//   fragment: 'baz',
-//   queryParameters: _yourQueryParameters,
-// );
-
-//var response = await http.get(uri);
-
 class Services {
   //var urlVessels = Uri.https(BASE, PATH_VESSELS);
   //var urlVessels = 'http://10.0.2.2:8000/api/vessel/getAll';

@@ -14,8 +14,8 @@ class AvailabilityBoxesWidget extends StatelessWidget with Helper {
   @override
   Widget build(BuildContext context) {
     return new Container(
-      width: 40,
-      height: 40,
+      width: 35,
+      height: 35,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
         color: Colors.white.withAlpha(200),

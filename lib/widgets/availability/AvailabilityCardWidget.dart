@@ -22,7 +22,7 @@ class AvailabilityCardWidget extends StatelessWidget with Helper {
   Widget build(BuildContext context) {
     return new Padding(
       padding:
-          EdgeInsets.only(top: 1.00, bottom: 1.00, left: 12.00, right: 12.00),
+          EdgeInsets.only(top: 1.00, bottom: 1.00, left: 11.00, right: 11.00),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,7 +45,7 @@ class AvailabilityCardWidget extends StatelessWidget with Helper {
                       ),
                     )),
                 Container(
-                  padding: EdgeInsets.only(left: 10.00, right: 10.00),
+                  padding: EdgeInsets.only(left: 9.00, right: 9.00),
                   //width: 115.0,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,13 +58,13 @@ class AvailabilityCardWidget extends StatelessWidget with Helper {
                             Icon(
                               Icons.directions_boat_filled_outlined,
                               color: hexStringToColor(availability.vslColor),
-                              size: 20,
+                              size: 19,
                             ),
                             Text(capitalize(availability.cruName),
                                 textAlign: TextAlign.center,
                                 //style: cruNameStyles,
                                 style: TextStyle(
-                                    fontSize: 16,
+                                    fontSize: 15,
                                     fontStyle: FontStyle.normal,
                                     fontWeight: FontWeight.bold,
                                     color: hexStringToColor(
@@ -122,7 +122,7 @@ class AvailabilityCardWidget extends StatelessWidget with Helper {
                                           ' night(s)',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
-                                          fontSize: 12,
+                                          fontSize: 10,
                                           fontStyle: FontStyle.normal)),
                                 ],
                               ),
@@ -130,10 +130,6 @@ class AvailabilityCardWidget extends StatelessWidget with Helper {
                           ),
                         ),
                       ),
-                      // Container(
-                      //   child: Text('\$ ' + availability.prices['rate'],
-                      //       textAlign: TextAlign.left, style: priceStyles),
-                      // ),
                     ]),
                 AvailabilityBoxesWidget(
                     num: numAvailables(availability.cabins).toString(),
@@ -150,20 +146,28 @@ class AvailabilityCardWidget extends StatelessWidget with Helper {
                 Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
-                      // Text(
-                      //   ' \$ ' + availability.prices['rate'].toString() ?? 0,
-                      //   textAlign: TextAlign.right,
-                      //   style: priceStyles,
-                      // ),
-                      availability.prices['rate'] != null
-                          ? Text(
-                              ' \$ ' + availability.prices['rate'].toString(),
-                              textAlign: TextAlign.right,
-                              style: priceStyles,
-                            )
-                          : Text("\$ 0",
-                              textAlign: TextAlign.right, style: priceStyles),
-                      AvailabilityWhatsappWidget(),
+                      Container(
+                        width: 80.0,
+                        padding: EdgeInsets.all(1),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            availability.prices['rate'] != null
+                                ? Text(
+                                    ' \$ ' +
+                                        availability.prices['rate'].toString(),
+                                    textAlign: TextAlign.right,
+                                    style: priceStyles,
+                                  )
+                                : Text("\$ 0",
+                                    textAlign: TextAlign.right,
+                                    style: priceStyles),
+                            AvailabilityWhatsappWidget(
+                              availability: availability,
+                            ),
+                          ],
+                        ),
+                      ),
                     ])
               ],
             ),
