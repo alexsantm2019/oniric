@@ -7,12 +7,16 @@ import 'package:oniric/mixins/Helper.dart';
 import '../constants.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'PopupScreen.dart';
+
 class HomeScreen extends StatelessWidget with Helper {
   static String routeName;
 
   @override
   Widget build(BuildContext context) {
     var t = AppLocalizations.of(context);
+    Future.delayed(Duration.zero, () => showAlert(context));
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: DefaultTabController(
@@ -56,6 +60,31 @@ class HomeScreen extends StatelessWidget with Helper {
           ),
         ),
       ),
+    );
+  }
+
+  void showAlert(BuildContext context) {
+    showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Tips'),
+          content: SingleChildScrollView(child: PopupScreen()),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('Start'),
+              color: Colors.orange,
+              textColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

@@ -35,12 +35,9 @@ dependencies:
   flutter_native_splash: ^1.2.4
   intl: ^0.17.0
   grouped_list: ^4.1.0
-  # sticky_grouped_list: ^1.3.0
   flutter_bloc: ^7.0.0
   country_list_pick: ^1.0.0+3
   mailer: ^3.2.1
-  # syncfusion_flutter_datepicker: ^19.3.48
-  # date_range_picker: ^1.0.7
   date_range_form_field: ^1.0.2
   font_awesome_flutter: ^9.2.0
   json_table: ^2.0.1
@@ -48,13 +45,7 @@ dependencies:
   flutter_staggered_animations: "^1.0.0"
   shared_preferences: ^2.0.8
   carousel_slider: ^3.0.0  
-  # simple_animations: ^4.0.1
-  # animated_splash: ^1.0.0
   avatar_glow: ^2.0.2
-  # carousel_pro: ^1.0.0
-  # simple_slider: "^0.0.1"
-  # flutter_carousel_slider: ^1.0.2
-
 
 dev_dependencies:
   # intl: ^0.17.0

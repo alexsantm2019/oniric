@@ -3,6 +3,7 @@ import 'package:oniric/models/Availability.dart';
 import 'package:oniric/models/Itinerary.dart';
 import 'package:oniric/widgets/availability/AvailabilityBoxesWidget.dart';
 import 'package:oniric/widgets/availability/AvailabilityWhatsappWidget.dart';
+import 'package:oniric/widgets/boats/BoatDetailBoatWidget.dart';
 import '../../constants.dart';
 import 'package:intl/intl.dart';
 import 'package:oniric/mixins/Helper.dart';
@@ -50,26 +51,43 @@ class AvailabilityCardWidget extends StatelessWidget with Helper {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Icon(
-                              Icons.directions_boat_filled_outlined,
-                              color: hexStringToColor(availability.vslColor),
-                              size: 19,
-                            ),
-                            Text(capitalize(availability.cruName),
-                                textAlign: TextAlign.center,
-                                //style: cruNameStyles,
-                                style: TextStyle(
-                                    fontSize: 15,
-                                    fontStyle: FontStyle.normal,
-                                    fontWeight: FontWeight.bold,
-                                    color: hexStringToColor(
-                                        availability.vslColor))),
-                          ]),
+                      Container(
+                        width: 87.0,
+                        child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Icon(
+                                Icons.directions_boat_filled_outlined,
+                                color: hexStringToColor(availability.vslColor),
+                                size: 19,
+                              ),
+                              // Text(capitalize(availability.cruName),
+                              //     textAlign: TextAlign.center,
+                              //     //style: cruNameStyles,
+                              //     style: TextStyle(
+                              //         fontSize: 15,
+                              //         fontStyle: FontStyle.normal,
+                              //         fontWeight: FontWeight.bold,
+                              //         color: hexStringToColor(
+                              //             availability.vslColor))),
+                              new GestureDetector(
+                                onTap: () {
+                                  showDetailBoat(availability.vslId, context);
+                                },
+                                child: Text(capitalize(availability.cruName),
+                                    textAlign: TextAlign.center,
+                                    //style: cruNameStyles,
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        fontStyle: FontStyle.normal,
+                                        fontWeight: FontWeight.bold,
+                                        color: hexStringToColor(
+                                            availability.vslColor))),
+                              )
+                            ]),
+                      ),
                       Text(
                           availability.depStartDate != ''
                               ? DateFormat.yMMMMd('en_US').format(
@@ -192,6 +210,23 @@ class AvailabilityCardWidget extends StatelessWidget with Helper {
     }).catchError((error, stackTrace) {
       final snackBar = SnackBar(
           content: Text("Sorry, we do not have itinerary information"));
+      Scaffold.of(context).showSnackBar(snackBar);
+      print("Error: $error");
+    });
+  }
+
+  void showDetailBoat(vslId, context) async {
+    await _services.getBoatInfo(vslId).then((val) {
+      // ignore: unrelated_type_equality_checks
+      var boat = val;
+      if (val.vslId != null) {
+        Navigator.of(context, rootNavigator: true).push(MaterialPageRoute(
+          builder: (context) => BoatDetailBoatWidget(boatInfo: val, boat: boat),
+        ));
+      }
+    }).catchError((error, stackTrace) {
+      final snackBar = SnackBar(
+          content: Text("We're sorry. There is no data for the selected boat"));
       Scaffold.of(context).showSnackBar(snackBar);
       print("Error: $error");
     });

@@ -6,6 +6,7 @@ class Availability {
   final String cruName;
   final int cruPaxLimit;
   final String vslColor;
+  final int vslId;
   final String itiCode;
   final int itiId;
   final int itiNights;
@@ -22,6 +23,7 @@ class Availability {
       this.cruName,
       this.cruPaxLimit,
       this.vslColor,
+      this.vslId,
       this.itiCode,
       this.itiId,
       this.itiNights,
@@ -38,6 +40,7 @@ class Availability {
       cruName: json['cruName'],
       cruPaxLimit: json['cruPaxLimit'],
       vslColor: json['vslColor'],
+      vslId: json['vslId'],
       itiCode: json['itiCode'],
       itiId: json['itiId'],
       itiNights: json['itiNights'],
@@ -55,6 +58,7 @@ class Availability {
     data['cruName'] = this.cruName;
     data['cruPaxLimit'] = this.cruPaxLimit;
     data['vslColor'] = this.vslColor;
+    data['vslId'] = this.vslId;
     data['itiCode'] = this.itiCode;
     data['itiId'] = this.itiId;
     data['itiNights'] = this.itiNights;

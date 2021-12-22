@@ -96,8 +96,10 @@ class BoatTableWidget extends StatelessWidget with Helper {
                                   : MAIN_COLOR_ORANGE)))
                     ]),
                     Column(children: [
-                      Text(
-                          '${boatInfo.vslDescription != null ? boatInfo.vslDescription : "No description"}')
+                      Container(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Text(
+                              '${boatInfo.vslDescription != null ? boatInfo.vslDescription : "No description"}'))
                     ]),
                   ]),
                   TableRow(children: [
